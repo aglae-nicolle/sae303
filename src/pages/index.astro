@@ -6,16 +6,9 @@ import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+  <div class="bg-marron-clair p-10">
+    <h1 class="text-marron-fonce items-center justify-center flex h-50">
+      L'impact environnemental de l'IA générative
+    </h1>
+  </div>
 </Layout>
