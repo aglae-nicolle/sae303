@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Frefoka';
+  font-family: 'Fredoka';
   src: url('/fonts/Fredoka.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -26,15 +26,19 @@
 
 
   --font-fredoka: 'Fredoka', sans-serif;
-  --font-lexend: 'lexend', sans-serif; 
+  --font-lexend: 'Lexend', sans-serif; 
 }
 
 @layer base {
-  h1, h2  {
+  h1, h2, h3  {
     font-family: var(--font-fredoka);
   } 
 
+  h3 {
+    font-size: x-large;
+  }
+
   body {
-    font-family: var(--front-lexend);
+    font-family: var(--font-lexend);
   } 
 }
