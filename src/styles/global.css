@@ -52,3 +52,39 @@
   } 
 
 }
+
+/* ========== BANDEAU HERO ANIMÉ ========== */
+header h1,
+.hero h1,
+h1 {
+  animation: apparitionTitre 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes apparitionTitre {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: normal;
+  }
+}
+
+/* Dégradé qui bouge UNE SEULE FOIS puis se fige */
+.hero,
+header + div,
+.bandeau {
+  background: linear-gradient(-45deg, var(
+    --color-marron-clair), var(--color-vert-clair), var(--color-marron-fonce), var(--color-marron-clair));
+  background-size: 400% 400%;
+  animation: degradeAnime 4s ease forwards;
+}
+
+@keyframes degradeAnime {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}

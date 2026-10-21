@@ -15,8 +15,13 @@ import Footer from "../components/Footer.astro";
     <title>SAE 303 - Impact IA</title>
   </head>
   <body class="bg-beige">
+      <div id="barre-progression"></div>
+  <div class="bulles-fond">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
     <Header />
     <slot />
     <Footer />
+    <script is:inline src="/script.js"></script>
   </body>
 </html>
