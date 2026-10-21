@@ -1,0 +1,231 @@
+---
+import * as d3 from "d3";
+import imageGeneration from "../../assets/HuggingFace_EnergyUse_image_generation.json";
+import questionAnswering from "../../assets/HuggingFace_EnergyUse_question_answering.json";
+import reasoning from "../../assets/HuggingFace_EnergyUse_reasoning.json";
+import summarization from "../../assets/HuggingFace_EnergyUse_summarization.json";
+import textGeneration from "../../assets/HuggingFace_EnergyUse_text_generation.json";
+import Layout from "../../layouts/Layout.astro";
+
+// HYPOTHÈSE : total_gpu_energy = Wh pour 1 000 requêtes (convention AI Energy Score).
+// Si les valeurs sont déjà par requête, passer à 1.
+const PAR_REQUETE = 1000;
+
+const taches = [
+    {
+        value: "image_generation",
+        label: "Génération d'images",
+        data: imageGeneration,
+    },
+    {
+        value: "question_answering",
+        label: "Questions-réponses",
+        data: questionAnswering,
+    },
+    { value: "reasoning", label: "Raisonnement", data: reasoning },
+    { value: "summarization", label: "Résumé de texte", data: summarization },
+    {
+        value: "text_generation",
+        label: "Génération de texte",
+        data: textGeneration,
+    },
+];
+
+// Normalisation : une seule structure { tache, modele, wh } pour tout le monde
+const energie = taches.flatMap(({ value, data }) =>
+    d3
+        .rollups(
+            data.filter(
+                (d) =>
+                    d.total_gpu_energy != null &&
+                    d.total_gpu_energy !== "" &&
+                    +d.total_gpu_energy > 0,
+            ),
+            // si un modèle apparaît plusieurs fois (plusieurs tests), on moyenne
+            (v) => d3.mean(v, (d) => +d.total_gpu_energy) / PAR_REQUETE,
+            (d) => String(d.model),
+        )
+        .map(([modele, wh]) => ({ tache: value, modele, wh })),
+);
+
+// Échelle commune à toutes les tâches (comme dans ton notebook)
+const [min, max] = d3.extent(energie, (d) => d.wh);
+
+const options = taches.map(({ value, label }) => ({ value, label }));
+const tacheDefaut = "text_generation";
+---
+
+<Layout>
+    <nav
+        class="bg-marron-fonce text-marron-clair flex justify-between px-10 py-3 text-sm"
+    >
+        <a href="/stats/quiz" class="hover:underline">
+            Tester mes connaissances sur l'IA
+        </a>
+        <a href="/stats/comparateurIA" class="hover:underline">
+            Quelle est la meilleure IA ?
+        </a>
+        <a href="/stats/comparateurQuotidien" class="hover:underline">
+            Impact de l'IA vs Impact d'actions du quotidien
+        </a>
+        <a href="/stats/projetDataCenter" class="hover:underline">
+            Projet de construction de Data Center en France
+        </a>
+    </nav>
+
+    <div
+        class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+    >
+        <h1 class="text-marron-fonce">Quelle énergie pour quelle tâche ?</h1>
+        <p class="text-vert-fonce uppercase mb-8">
+            Énergie GPU par requête, selon le modèle et le type de tâche
+        </p>
+    </div>
+
+    <div class="m-10 mb-16 flex flex-col gap-4">
+        <!-- Sélecteur de tâche (= choix de la base) -->
+        <div class="flex items-center gap-3">
+            <label
+                for="select-tache"
+                class="text-sm font-medium text-vert-fonce"
+            >
+                Tâche :
+            </label>
+            <select
+                id="select-tache"
+                class="rounded border border-vert-fonce bg-white px-3 py-1.5 text-sm text-vert-fonce focus:outline-none focus:ring-2 focus:ring-marron-clair"
+            >
+                {
+                    options.map((o) => (
+                        <option
+                            value={o.value}
+                            selected={o.value === tacheDefaut}
+                        >
+                            {o.label}
+                        </option>
+                    ))
+                }
+            </select>
+        </div>
+    </div>
+
+    <div id="chart-energie" class="w-full overflow-x-auto px-10"></div>
+
+    <figcaption
+        class="mt-4 border-t border-vert-fonce/15 pt-3 text-xs text-marron-fonce p-10"
+    >
+        <p>
+            <strong>Source :</strong>
+            <a
+                href="https://huggingface.co/AIEnergyScore"
+                class="underline underline-offset-2 hover:text-vert-fonce"
+                target="_blank"
+                rel="noopener noreferrer">Hugging Face AI Energy Score</a
+            >.
+        </p>
+        <p class="mt-1">
+            Énergie GPU mesurée par requête. L'échelle est logarithmique et
+            identique pour toutes les tâches, afin de pouvoir les comparer entre
+            elles. La barre orange signale le modèle le plus énergivore de la
+            tâche.
+        </p>
+    </figcaption>
+</Layout>
+
+<script
+    is:inline
+    type="application/json"
+    id="chart-data"
+    set:html={JSON.stringify({
+        energie,
+        min,
+        max,
+        labels: Object.fromEntries(taches.map((t) => [t.value, t.label])),
+    })}
+/>
+
+<script>
+    import * as Plot from "@observablehq/plot";
+
+    const el = document.getElementById("chart-energie");
+    const select = document.getElementById("select-tache") as HTMLSelectElement;
+    const { energie, min, max, labels } = JSON.parse(
+        document.getElementById("chart-data").textContent,
+    );
+
+    const x0 = min / 2; // point de départ des barres (pas de 0 en échelle log)
+
+    const fmt = (wh) =>
+        wh < 1
+            ? `${(wh * 1000).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} mWh`
+            : `${wh.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} Wh`;
+
+    function render() {
+        const tache = select.value;
+        const data = energie
+            .filter((d) => d.tache === tache)
+            .sort((a, b) => b.wh - a.wh);
+
+        if (data.length === 0) {
+            el.replaceChildren(
+                Object.assign(document.createElement("p"), {
+                    className: "py-12 text-center text-sm text-marron-fonce",
+                    textContent: "Aucune donnée pour cette tâche.",
+                }),
+            );
+            return;
+        }
+
+        const chart = Plot.plot({
+            width: el.clientWidth,
+            height: data.length * 22 + 80,
+            marginLeft: 260,
+            marginRight: 20,
+            style: {
+                background: "#fff1df",
+                color: "#394030",
+                fontSize: "12px",
+            },
+            title: `Énergie par requête : ${labels[tache].toLowerCase()}`,
+            caption:
+                "Énergie GPU mesurée par requête · Source : Hugging Face AI Energy Score",
+            x: {
+                type: "log",
+                domain: [x0, max * 8], // marge à droite pour les étiquettes
+                ticks: [0.0000001, 0.00001, 0.001, 0.1, 10],
+                tickFormat: fmt,
+                label: "Énergie par requête (échelle logarithmique) →",
+                grid: true,
+            },
+            y: {
+                label: null,
+                domain: data.map((d) => d.modele),
+                padding: 0.2,
+            },
+            marks: [
+                Plot.barX(data, {
+                    y: "modele",
+                    x1: x0,
+                    x2: "wh",
+                    // l'orange marque seulement le modèle le plus énergivore
+                    fill: (d, i) => (i === 0 ? "#ff9b47" : "#394030"),
+                    title: (d) => `${d.modele}\n${fmt(d.wh)} par requête`,
+                }),
+                Plot.text(data, {
+                    y: "modele",
+                    x: "wh",
+                    text: (d) => fmt(d.wh),
+                    textAnchor: "start",
+                    dx: 6,
+                    fill: "#394030",
+                }),
+            ],
+        });
+
+        el.replaceChildren(chart);
+    }
+
+    select.addEventListener("change", render);
+    render();
+    new ResizeObserver(() => render()).observe(el);
+</script>
