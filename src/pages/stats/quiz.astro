@@ -1,0 +1,262 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="mx-auto max-w-3xl px-6 py-12 text-vert-fonce">
+    <section class="rounded-3xl bg-white/70 p-6 shadow-lg md:p-10">
+      <h1 class="mb-3 text-center">Quiz sur l’intelligence artificielle</h1>
+      <p class="mb-8 text-center">
+        Choisis une réponse pour chaque question, puis découvre ton score !
+      </p>
+
+      <form id="quiz-form">
+        <fieldset class="mb-8">
+          <legend class="mb-3 text-xl font-semibold">Q1 : Que signifie IA ?</legend>
+
+          <label class="quiz-reponse">
+            <input type="radio" name="q1" value="0" />
+            Intelligence avancée
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q1" value="1" />
+            Intelligence automatisée
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q1" value="2" />
+            Intelligence artificielle
+          </label>
+        </fieldset>
+
+        <fieldset class="mb-8">
+          <legend class="mb-3 text-xl font-semibold">
+            Q2 : Quelle est la définition de l’intelligence artificielle ?
+          </legend>
+
+          <label class="quiz-reponse">
+            <input type="radio" name="q2" value="0" />
+            Des outils numériques qui vont remplacer plus de 70 % des emplois humains
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q2" value="1" />
+            Des robots doués de conscience et capables d’éprouver des émotions
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q2" value="2" />
+            Des technologies capables de reproduire certains comportements humains,
+            comme le raisonnement ou la planification
+          </label>
+        </fieldset>
+
+        <fieldset class="mb-8">
+          <legend class="mb-3 text-xl font-semibold">
+            Q3 : Sur quoi repose l’IA pour fonctionner ?
+          </legend>
+
+          <label class="quiz-reponse">
+            <input type="radio" name="q3" value="0" />
+            Sur des systèmes informatiques, des données et des algorithmes
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q3" value="1" />
+            Sur une connexion Internet, sans programme ni données
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q3" value="2" />
+            Uniquement sur des robots et des émotions
+          </label>
+        </fieldset>
+
+        <fieldset class="mb-8">
+          <legend class="mb-3 text-xl font-semibold">Q4 : Que peut faire une IA ?</legend>
+
+          <label class="quiz-reponse">
+            <input type="radio" name="q4" value="0" />
+            Apprendre à partir de données et réaliser certaines tâches
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q4" value="1" />
+            Penser et ressentir exactement comme un humain
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q4" value="2" />
+            Tout ce qu’un humain peut faire
+          </label>
+        </fieldset>
+
+        <fieldset class="mb-8">
+          <legend class="mb-3 text-xl font-semibold">
+            Q5 : Pourquoi la consommation d’une requête IA peut-elle varier ?
+          </legend>
+
+          <label class="quiz-reponse">
+            <input type="radio" name="q5" value="0" />
+            Elle est toujours de 150 Wh
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q5" value="1" />
+            Elle est toujours de 1 000 000 Wh
+          </label>
+          <label class="quiz-reponse">
+            <input type="radio" name="q5" value="2" />
+            Elle dépend de plusieurs facteurs, comme la requête et le type d’IA
+          </label>
+        </fieldset>
+
+        <p id="message-erreur" class="mb-4 hidden text-center font-semibold text-red-700">
+          Choisis une réponse à chaque question avant de voir ton score.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+          <button
+            type="submit"
+            class="rounded-full bg-vert-fonce px-6 py-3 font-semibold text-beige hover:opacity-90"
+          >
+            Voir mon score
+          </button>
+
+          <button
+            type="reset"
+            class="rounded-full bg-marron-clair px-6 py-3 font-semibold text-vert-fonce hover:opacity-90"
+          >
+            Recommencer
+          </button>
+        </div>
+
+        <p
+          id="resultat"
+          class="mt-6 text-center text-2xl font-bold"
+          aria-live="polite"
+        ></p>
+      </form>
+    </section>
+  </main>
+
+  <style>
+    .quiz-reponse {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin: 0.75rem 0;
+      padding: 0.85rem 1rem;
+      border: 1px solid #dbbfa7;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+
+    .quiz-reponse:hover {
+      background-color: #fff1df;
+    }
+
+    .quiz-reponse input {
+      margin-top: 0.35rem;
+      accent-color: #394030;
+    }
+
+    .quiz-reponse.reponse-juste {
+  border-color: #2f7d32;
+  background-color: #e7f5e8;
+}
+
+.quiz-reponse.reponse-fausse {
+  border-color: #c62828;
+  background-color: #fdeaea;
+}
+
+.retour-question {
+  margin-top: 0.75rem;
+  font-weight: 600;
+}
+  </style>
+
+  <script>
+  const form = document.querySelector<HTMLFormElement>("#quiz-form");
+  const resultat = document.querySelector<HTMLParagraphElement>("#resultat");
+  const messageErreur =
+    document.querySelector<HTMLParagraphElement>("#message-erreur");
+
+  const bonnesReponses: Record<string, string> = {
+    q1: "2",
+    q2: "2",
+    q3: "0",
+    q4: "0",
+    q5: "2",
+  };
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!form || !resultat || !messageErreur) return;
+
+    const questions = Array.from(form.querySelectorAll("fieldset"));
+
+    // Vérifie que toutes les questions ont une réponse
+    const toutesRepondues = questions.every((question) =>
+      question.querySelector<HTMLInputElement>("input:checked")
+    );
+
+    if (!toutesRepondues) {
+      messageErreur.classList.remove("hidden");
+      resultat.textContent = "";
+      return;
+    }
+
+    messageErreur.classList.add("hidden");
+    let score = 0;
+
+    questions.forEach((question) => {
+      const choix = question.querySelector<HTMLInputElement>("input:checked");
+      if (!choix) return;
+
+      const nomQuestion = choix.name;
+      const reponseCorrecte = form.querySelector<HTMLInputElement>(
+        `input[name="${nomQuestion}"][value="${bonnesReponses[nomQuestion]}"]`
+      );
+
+      // Retire les anciennes couleurs si le quiz est corrigé à nouveau
+      question.querySelectorAll(".quiz-reponse").forEach((label) => {
+        label.classList.remove("reponse-juste", "reponse-fausse");
+      });
+
+      const labelCorrect = reponseCorrecte?.closest(".quiz-reponse");
+      const labelChoisi = choix.closest(".quiz-reponse");
+
+      labelCorrect?.classList.add("reponse-juste");
+
+      if (choix.value === bonnesReponses[nomQuestion]) {
+        score++;
+      } else {
+        labelChoisi?.classList.add("reponse-fausse");
+      }
+
+      let retour = question.querySelector<HTMLParagraphElement>(
+        ".retour-question"
+      );
+
+      if (!retour) {
+        retour = document.createElement("p");
+        retour.className = "retour-question";
+        question.appendChild(retour);
+      }
+
+      const texteCorrect = labelCorrect?.textContent?.trim();
+      retour.textContent = `Bonne réponse : ${texteCorrect}`;
+    });
+
+    resultat.textContent = `Ton score : ${score} / 5`;
+  });
+
+  form?.addEventListener("reset", () => {
+    if (resultat) resultat.textContent = "";
+    if (messageErreur) messageErreur.classList.add("hidden");
+
+    form.querySelectorAll(".quiz-reponse").forEach((label) => {
+      label.classList.remove("reponse-juste", "reponse-fausse");
+    });
+
+    form.querySelectorAll(".retour-question").forEach((retour) => {
+      retour.remove();
+    });
+  });
+</script>
+</Layout>
