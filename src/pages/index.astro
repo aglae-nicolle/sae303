@@ -1,21 +1,26 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
 import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+  <div
+    class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+  >
+    <!-- Hero -->
+    <h1 class="text-marron-fonce">
+      L'impact environnemental de l'IA générative
+    </h1>
+    <p class="text-vert-fonce uppercase mb-8">
+      Comment mieux comprendre les données disponibles pour mesurer cet impact
+      et faire des choix éclairés ?
+    </p>
+    <a
+      href="/stats/quiz"
+      class="bg-vert-fonce rounded-2xl py-3 px-6 text-vert-clair hover:bg-orange hover:text-marron-fonce"
+    >
+      Tester mes connaissances sur l'IA
+    </a>
+  </div>
+
+  uafiihiaskdkmxos
 </Layout>
