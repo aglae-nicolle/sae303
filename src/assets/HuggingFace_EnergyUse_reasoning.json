@@ -1,0 +1,128 @@
+[
+  {
+    "model": "Qwen/Qwen3-0.6B",
+    "total_gpu_energy": 0.54699,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "tencent/Hunyuan-1.8B-Instruct",
+    "total_gpu_energy": 1.47896,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-120b medium",
+    "total_gpu_energy": 6.5863,
+    "energy_score": 2,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-120b low",
+    "total_gpu_energy": 5.31293,
+    "energy_score": 2,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-120b high",
+    "total_gpu_energy": 8.50362,
+    "energy_score": 1,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "microsoft/Phi-4-reasoning-plus",
+    "total_gpu_energy": 9.46161,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-20b medium",
+    "total_gpu_energy": 4.12211,
+    "energy_score": 5,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-20b low",
+    "total_gpu_energy": 1.13559,
+    "energy_score": 5,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "openai/gpt-oss-20b high",
+    "total_gpu_energy": 5.51201,
+    "energy_score": 4,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-235B-A22B",
+    "total_gpu_energy": 0.30053,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-30B-A3B",
+    "total_gpu_energy": 11.13006,
+    "energy_score": 3,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "LGAI-EXAONE/EXAONE-4.0-32B",
+    "total_gpu_energy": 18.99236,
+    "energy_score": 1,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+    "total_gpu_energy": 4.78983,
+    "energy_score": 3,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "total_gpu_energy": 12.79122,
+    "energy_score": 1,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "google/gemma-3-4b-pt",
+    "total_gpu_energy": 11.81118,
+    "energy_score": 1,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+    "total_gpu_energy": 7.62653,
+    "energy_score": 1,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+    "total_gpu_energy": 0.26673,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-Next-80B-A3B-Thinking",
+    "total_gpu_energy": 0.27667,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  }
+]

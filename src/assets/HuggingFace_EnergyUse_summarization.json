@@ -1,0 +1,57 @@
+[
+  {
+    "model": "pszemraj/led-large-book-summary",
+    "total_gpu_energy": 0.004288572,
+    "energy_score": 5
+  },
+  {
+    "model": "facebook/bart-large-cnn",
+    "total_gpu_energy": 0.002039253,
+    "energy_score": 5
+  },
+  {
+    "model": "KipperDev/bart_summarizer_model",
+    "total_gpu_energy": 0.000784852,
+    "energy_score": 5
+  },
+  {
+    "model": "google/bigbird-pegasus-large-arxiv",
+    "total_gpu_energy": 0.003523812,
+    "energy_score": 5
+  },
+  {
+    "model": "sshleifer/distilbart-cnn-12-6",
+    "total_gpu_energy": 0.001481002,
+    "energy_score": 5
+  },
+  {
+    "model": "sshleifer/distilbart-xsum-12-1",
+    "total_gpu_energy": 0.001049138,
+    "energy_score": 5
+  },
+  {
+    "model": "google-t5/t5-large",
+    "total_gpu_energy": 0.008676504,
+    "energy_score": 4
+  },
+  {
+    "model": "google-t5/t5-11b",
+    "total_gpu_energy": 0.034807171,
+    "energy_score": 1
+  },
+  {
+    "model": "google-t5/t5-3b",
+    "total_gpu_energy": 0.013240065,
+    "energy_score": 4
+  },
+  {
+    "model": "google-t5/t5-base",
+    "total_gpu_energy": 0.004230194,
+    "energy_score": 5
+  },
+  {
+    "model": "google-t5/t5-small",
+    "total_gpu_energy": 0.002266265,
+    "energy_score": 5
+  }
+]

@@ -1,0 +1,222 @@
+---
+import geoJson from "../../assets/departements-version-simplifiee.geojson?raw";
+import projetsJson from "../../assets/projets_de_data_centers_en_france.json";
+import Layout from "../../layouts/Layout.astro";
+import { groupByDepartment } from "../../lib/geo.js";
+
+const geo = JSON.parse(geoJson);
+const projets = projetsJson;
+
+// Métropole uniquement : on retire les DROM (971, 972, 973, 974, 976)
+const metro = {
+    type: "FeatureCollection",
+    features: geo.features.filter(
+        (f: { properties: { code: string } }) =>
+            !String(f.properties.code).startsWith("97"),
+    ),
+};
+
+// --- Agrégation au build -------------------------------------------------
+const byDep = groupByDepartment(metro, projets);
+
+const max = Math.max(...[...byDep.values()].map((d) => d.items.length), 1);
+
+const totalProjets = [...byDep.values()].reduce(
+    (total, d) => total + d.items.length,
+    0,
+);
+const nbDepartements = [...byDep.values()].filter(
+    (d) => d.items.length > 0,
+).length;
+
+const top = [...byDep.entries()]
+    .map(([code, d]) => ({ code, nom: d.nom, n: d.items.length }))
+    .sort((a, b) => b.n - a.n)[0];
+
+// Map non sérialisable -> objet simple
+const mapData = { metro, byDep: Object.fromEntries(byDep), max };
+---
+
+<Layout>
+    <nav
+        class="bg-marron-fonce text-marron-clair flex justify-between px-10 py-3 text-sm"
+    >
+        <a href="/stats/quiz" class="hover:underline">
+            Tester mes connaissances sur l'IA
+        </a>
+        <a href="/stats/comparateurIA" class="hover:underline">
+            Quelle est la meilleure IA ?
+        </a>
+        <a href="/stats/comparateurVoiture" class="hover:underline">
+            IA vs Voiture
+        </a>
+        <a href="/stats/projetDataCenter" class="hover:underline">
+            Projet de construction de Data Center en France
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <div
+        class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+    >
+        <h1 class="text-marron-fonce">
+            Où se construisent les data centers en France ?
+        </h1>
+        <p class="text-vert-fonce uppercase mb-8">
+            Nombre de projets de data centers par département
+        </p>
+    </div>
+
+    <!-- Chiffres clés -->
+    <div class="m-10 mb-6 grid gap-4 sm:grid-cols-3">
+        <div class="rounded border border-vert-fonce/15 p-4 text-center">
+            <p class="text-3xl font-bold text-marron-fonce">{totalProjets}</p>
+            <p class="text-sm text-vert-fonce">projets recensés</p>
+        </div>
+        <div class="rounded border border-vert-fonce/15 p-4 text-center">
+            <p class="text-3xl font-bold text-marron-fonce">
+                {nbDepartements}
+            </p>
+            <p class="text-sm text-vert-fonce">départements concernés</p>
+        </div>
+        <div class="rounded border border-vert-fonce/15 p-4 text-center">
+            <p class="text-3xl font-bold text-marron-fonce">
+                {top.nom}
+            </p>
+            <p class="text-sm text-vert-fonce">
+                département le plus concerné ({top.n} projet{
+                    top.n > 1 ? "s" : ""
+                })
+            </p>
+        </div>
+    </div>
+
+    <!-- Carte -->
+    <div id="chart-carte" class="w-full overflow-x-auto px-10"></div>
+
+    <figcaption
+        class="mt-4 border-t border-vert-fonce/15 pt-3 text-xs text-marron-fonce p-10"
+    >
+        <p>
+            <strong>Sources :</strong>
+            <a
+                href="https://github.com/gregoiredavid/france-geojson"
+                class="underline underline-offset-2 hover:text-vert-fonce"
+                target="_blank"
+                rel="noopener noreferrer">France GeoJSON</a
+            >.
+        </p>
+        <p class="mt-1">
+            Méthodologie : chaque projet est rattaché au département contenant
+            ses coordonnées ; à défaut (point en mer ou sur une frontière), au
+            département le plus proche.
+        </p>
+    </figcaption>
+</Layout>
+
+<script
+    is:inline
+    type="application/json"
+    id="map-data"
+    set:html={JSON.stringify(mapData)}
+/>
+
+<script>
+    import * as Plot from "@observablehq/plot";
+
+    const el = document.getElementById("chart-carte");
+    if (!el) throw new Error("Élément chart-carte introuvable");
+    const mapDataEl = document.getElementById("map-data");
+    if (!mapDataEl) throw new Error("Élément map-data introuvable");
+    const {
+        metro,
+        byDep: byDepObj,
+        max,
+    } = JSON.parse(mapDataEl.textContent ?? "");
+
+    const byDep = new Map(
+        Object.entries(byDepObj) as [
+            string,
+            { nom: string; items: string[] },
+        ][],
+    );
+    const count = (f: { properties: { code: string } }) =>
+        byDep.get(f.properties.code)?.items.length ?? 0;
+
+    const sansProjet = metro.features.filter(
+        (f: { properties: { code: string } }) => count(f) === 0,
+    );
+    const avecProjets = metro.features.filter(
+        (f: { properties: { code: string } }) => count(f) > 0,
+    );
+
+    function render() {
+        // Carré, plafonné à 760 px, adapté à la largeur disponible
+        const size = Math.min(760, el!.clientWidth);
+
+        const chart = Plot.plot({
+            width: size,
+            height: size,
+            style: {
+                background: "#fff1df",
+                color: "#394030",
+                fontSize: "12px",
+            },
+            projection: {
+                type: "conic-conformal",
+                parallels: [44, 49],
+                rotate: [-3, 0],
+                domain: metro,
+            },
+            color: {
+                type: "linear",
+                domain: [1, max],
+                range: ["#dad09e", "#394030"],
+                label: "Nombre de projets",
+                legend: true,
+            },
+            marks: [
+                // Départements sans projet
+                Plot.geo(sansProjet, {
+                    fill: "#fff1df",
+                    stroke: "#61453a",
+                    strokeWidth: 0.6,
+                    title: (f) =>
+                        `${f.properties.nom} (${f.properties.code}) : 0 projet`,
+                    tip: true,
+                }),
+                // Départements avec projets : plus foncé = plus de projets
+                Plot.geo(avecProjets, {
+                    fill: count,
+                    stroke: "#fff1df",
+                    strokeWidth: 0.8,
+                    title: (f) => {
+                        const o = byDep.get(f.properties.code);
+                        if (!o)
+                            return `${f.properties.nom} (${f.properties.code}) : 0 projet`;
+                        return (
+                            `${o.nom} (${f.properties.code}) : ${o.items.length} projet${o.items.length > 1 ? "s" : ""}\n` +
+                            o.items.map((n) => "• " + n).join("\n")
+                        );
+                    },
+                    tip: true,
+                }),
+                // Nombre affiché au centre de chaque département concerné
+                Plot.text(
+                    avecProjets,
+                    Plot.centroid({
+                        text: count,
+                        fill: (f) =>
+                            count(f) > (max + 1) / 2 ? "#61453a" : "#394030",
+                        fontWeight: 600,
+                    }),
+                ),
+            ],
+        });
+
+        el.replaceChildren(chart);
+    }
+
+    render();
+    new ResizeObserver(() => render()).observe(el);
+</script>
