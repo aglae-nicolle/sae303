@@ -3,24 +3,33 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <div
-    class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
-  >
-    <!-- Hero -->
-    <h1 class="text-marron-fonce">
-      L'impact environnemental de l'IA générative
-    </h1>
-    <p class="text-vert-fonce uppercase mb-8">
-      Comment mieux comprendre les données disponibles pour mesurer cet impact
-      et faire des choix éclairés ?
-    </p>
-    <a
-      href="/stats/quiz"
-      class="bg-vert-fonce rounded-2xl py-3 px-6 text-vert-clair hover:bg-orange hover:text-marron-fonce"
-    >
-      Tester mes connaissances sur l'IA
-    </a>
-  </div>
+  <main>
+    <section class="hero-accueil" aria-labelledby="titre-accueil">
+      <div class="hero-contenu">
+        <p class="hero-surtitre">Comprendre pour mieux choisir</p>
+        <h1 id="titre-accueil">
+          L’intelligence artificielle a aussi un coût écologique.
+        </h1>
+        <p class="hero-description">
+          Découvrez ce que l’on sait de son impact environnemental, explorez les
+          données et faites des choix plus éclairés.
+        </p>
+        <div class="hero-actions">
+          <a class="hero-bouton" href="/stats/quiz">
+            Tester mes connaissances <span aria-hidden="true">→</span>
+          </a>
+          <a class="hero-lien" href="/aboutIA">Découvrir le sujet</a>
+        </div>
+      </div>
 
-  uafiihiaskdkmxos
+      <div class="hero-visuel" aria-hidden="true">
+        <div class="hero-orbite hero-orbite-externe"></div>
+        <div class="hero-orbite hero-orbite-interne"></div>
+      
+        <div class="hero-message">
+       
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="sources-page">
+    <section class="sources-intro">
+      <p class="sources-surtitre">Pour aller plus loin</p>
+      <h1>Nos sources</h1>
+      <p>
+        Nous avons utilisé les ressources suivantes pour réaliser notre projet
+        et documenter les données présentées sur le site.
+      </p>
+    </section>
+
+    <section class="sources-liste" aria-label="Liste des sources">
+      <article class="source-carte">
+        <span class="source-categorie">Intelligence artificielle</span>
+        <h2>Compar:IA</h2>
+        <p>
+          Une plateforme publique permettant de tester et de comparer différents
+          modèles d’intelligence artificielle conversationnelle.
+        </p>
+        <a
+          href="https://ia.numerique.gouv.fr/cas-dusage-de-lia-dans-letat/comparia/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consulter Compar:IA <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+
+      <article class="source-carte">
+        <span class="source-categorie">Data centers</span>
+        <h2>Carte uMap des data centers en France</h2>
+        <p>
+          Carte utilisée pour repérer et étudier la répartition des data centers
+          en France.
+        </p>
+        <a
+          href="https://umap.openstreetmap.fr/fr/map/projets-de-data-centers-en-france_1361384?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true#5/49.052270/2.416992"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Voir la carte uMap <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+
+      <article class="source-carte">
+        <span class="source-categorie">Impact de l’IA</span>
+        <h2>EcoLogits</h2>
+        <p>
+          Outil qui estime certains impacts environnementaux des modèles d’IA
+          générative, notamment leur consommation d’énergie, d’eau et leurs
+          émissions.
+        </p>
+        <a
+          href="https://ecologits.ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consulter EcoLogits <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+
+      <article class="source-carte">
+        <span class="source-categorie">Transports</span>
+        <h2>ADEME — données sur les transports</h2>
+        <p>
+          Ressources de l’ADEME utilisées pour comparer ou contextualiser
+          l’impact environnemental des transports.
+        </p>
+        <a
+          href="https://www.data.gouv.fr/datasets/emissions-de-co2-et-de-polluants-des-vehicules-commercialises-en-france"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consulter la source ADEME <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+
+      <article class="source-carte">
+        <span class="source-categorie">Efficacité énergétique de l’IA</span>
+        <h2>AI Energy Score</h2>
+        <p>
+          Initiative proposant des mesures comparables de l’efficacité
+          énergétique de différents modèles d’intelligence artificielle.
+        </p>
+        <a
+          href="https://huggingface.co/spaces/AIEnergyScore/Leaderboard"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consulter l’AI Energy Score <span aria-hidden="true">↗</span>
+        </a>
+        
+      </article>
+
+      <article class="source-carte">
+  <span class="source-categorie">Données géographiques</span>
+  <h2>GeoJSON des départements français</h2>
+  <p>
+    Fichier géographique utilisé pour représenter les contours des départements
+    français sur notre carte.
+  </p>
+  <a
+    href="https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements-version-simplifiee.geojson"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Consulter le fichier GeoJSON <span aria-hidden="true">↗</span>
+  </a>
+</article>
+
+    </section>
+
+    <p class="sources-note">
+      Les estimations et les résultats peuvent varier selon les données, les
+      méthodes de calcul et les modèles étudiés. Date de visualisation des données : 2026-10-20. Pour plus d’informations, consultez les sources listées ci-dessus.
+    </p>
+  </main>
+</Layout>
+
+<style>
+  .sources-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    color: var(--color-vert-fonce);
+  }
+
+  .sources-intro {
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+  }
+
+  .sources-surtitre,
+  .source-categorie {
+    color: var(--color-marron-fonce);
+    font-weight: 700;
+  }
+
+  .sources-intro h1 {
+    margin: 0.4rem 0 1rem;
+  }
+
+  .sources-intro > p:last-child {
+    line-height: 1.7;
+  }
+
+  .sources-liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .source-carte {
+    padding: 1.5rem;
+    border: 1px solid var(--color-marron-clair);
+    border-radius: 1rem;
+    background: #fffaf3;
+  }
+
+  .source-carte h2 {
+    margin: 0.75rem 0;
+    font-size: 1.4rem;
+  }
+
+  .source-carte p {
+    line-height: 1.6;
+  }
+
+  .source-carte a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #8a461c;
+    font-weight: 700;
+    text-underline-offset: 4px;
+  }
+
+  .sources-note {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--color-orange);
+    background: #fffaf3;
+    line-height: 1.6;
+  }
+</style>
