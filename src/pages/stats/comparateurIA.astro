@@ -1,81 +1,386 @@
 ---
+import * as d3 from "d3";
+import moyennes from "../../assets/moyennes_par_modele.json";
 import Layout from "../../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import PlotFigure from "../../components/PlotFigure.astro";
-import penguins from "../../assets/penguins.json";
 
-export function getImpactData() {
-    return penguins
-        .filter(
-            (d) =>
-                typeof d.body_mass_g === "number" &&
-                typeof d.culmen_length_mm === "number",
-        )
-        .slice(0, 8)
-        .map((d, i) => ({
-            model: `${d.species} #${i + 1}`,
-            waterMlPerToken: d.culmen_length_mm / 1000,
-            energyWhPerToken: d.body_mass_g / 1_000_000,
-        }));
-}
+const datacenters = {
+    OpenAI: { pue: 1.2, wueOnsite: 0.569, wueOffsite: 3.1321 }, // USA
+    Anthropic: { pue: 1.115, wueOnsite: 0.5645, wueOffsite: 3.1321 }, // USA, milieu des fourchettes
+    Google: { pue: 1.09, wueOnsite: 0.999, wueOffsite: 3.1321 }, // USA
+    Mistral: { pue: 1.16, wueOnsite: 0.09, wueOffsite: 6.0315 }, // Suède
+    DeepSeek: { pue: 1.115, wueOnsite: 0.56, wueOffsite: 3.1321 }, // hypothèse HF Hub, USA
+};
 
-const data = getImpactData();
+// Profil utilisé quand le fournisseur est inconnu (hypothèse HF Hub, USA)
+const datacenterParDefaut = {
+    pue: 1.115,
+    wueOnsite: 0.56,
+    wueOffsite: 3.1321,
+};
 
-const METRICS = [
-    {
-        key: "waterMlPerToken",
-        title: "Consommation d'eau par token",
-        unit: "mL / token",
-        color: "var(--color-vert-fonce)",
-    },
-    {
-        key: "energyWhPerToken",
-        title: "Consommation d'électricité par token",
-        unit: "Wh / token",
-        color: "var(--color-marron-fonce)",
-    },
+const modelesConnus = new Map([
+    ["gpt-5", { label: "GPT-5", fournisseur: "OpenAI" }],
+    [
+        "claude-4-5-sonnet",
+        { label: "Claude 4.5 Sonnet", fournisseur: "Anthropic" },
+    ],
+    ["gemini-2.5-flash", { label: "Gemini 2.5 Flash", fournisseur: "Google" }],
+    [
+        "mistral-large-2512",
+        { label: "Mistral Large 3", fournisseur: "Mistral" },
+    ],
+    ["deepseek-r1", { label: "DeepSeek R1", fournisseur: "DeepSeek" }],
+]);
+
+const mesures = [
+    "Tokens / requête",
+    "Énergie / requête (Wh)",
+    "Eau / requête (mL)",
 ];
 
-function buildOptions(metric: (typeof METRICS)[number]) {
-    return {
-        title: metric.title,
-        subtitle: `Unité : ${metric.unit}`,
-        ariaLabel: `Diagramme à barres : ${metric.title.toLowerCase()} pour chaque modèle, en ${metric.unit}`,
-        width: 720,
-        height: 60 + data.length * 36,
-        marginLeft: 140,
-        grid: true,
-        x: { label: `${metric.unit} →` },
-        y: { label: null },
-        marks: [
-            Plot.frame({ stroke: "var(--color-marron-fonce)" }),
-            Plot.barX(data, {
-                y: "model",
-                x: metric.key,
-                fill: metric.color,
-                sort: { y: "-x" },
-            }),
-            Plot.text(data, {
-                y: "model",
-                x: metric.key,
-                text: (d: any) => d[metric.key].toPrecision(2),
-                dx: 6,
-                textAnchor: "start",
-                fill: "var(--color-marron-fonce)",
-            }),
-            Plot.ruleX([0], { stroke: "var(--color-marron-fonce)" }),
-        ],
-        style: {
-            background: "transparent",
-            color: "var(--color-marron-fonce)",
-            fontFamily: "system-ui, sans-serif",
-        },
-    };
-}
+const fr = (x, dec) =>
+    x.toLocaleString("fr-FR", { maximumFractionDigits: dec });
+
+const infosModele = (name) =>
+    modelesConnus.get(name) ?? { label: name, fournisseur: null };
+
+const rollup = d3.rollup(
+    moyennes.filter(
+        (d) =>
+            d.moyenne_kwh !== "" &&
+            d.moyenne_kwh != null &&
+            d.nb_conversations > 0,
+    ),
+    (v) => {
+        const { fournisseur } = infosModele(v[0].model_name);
+        const dc = datacenters[fournisseur] ?? datacenterParDefaut;
+        const { pue, wueOnsite, wueOffsite } = dc;
+
+        const n = d3.sum(v, (d) => d.nb_conversations);
+        const tokens =
+            d3.sum(v, (d) => d.moyenne_output_tokens * d.nb_conversations) / n;
+        const kwh = d3.sum(v, (d) => +d.moyenne_kwh * d.nb_conversations) / n;
+        const litres = (kwh / pue) * (wueOnsite + pue * wueOffsite);
+
+        return {
+            tokens,
+            wh: kwh * 1000,
+            ml: litres * 1000,
+            nb: n,
+            eauEstimee: !datacenters[fournisseur], // datacenter inconnu
+        };
+    },
+    (d) => infosModele(d.model_name).label,
+);
+
+const rows = Array.from(rollup, ([modele, m]) => [
+    {
+        modele,
+        mesure: mesures[0],
+        valeur: m.tokens,
+        texte: `${fr(m.tokens, 0)} tokens`,
+        nb: m.nb,
+        eauEstimee: false,
+    },
+    {
+        modele,
+        mesure: mesures[1],
+        valeur: m.wh,
+        texte: `${fr(m.wh, 2)} Wh`,
+        nb: m.nb,
+        eauEstimee: false,
+    },
+    {
+        modele,
+        mesure: mesures[2],
+        valeur: m.ml,
+        texte: `${fr(m.ml, 1)} mL${m.eauEstimee ? " *" : ""}`,
+        nb: m.nb,
+        eauEstimee: m.eauEstimee,
+    },
+]).flat();
+
+const max = d3.rollup(
+    rows,
+    (v) => d3.max(v, (d) => d.valeur),
+    (d) => d.mesure,
+);
+const long = rows.map((d) => ({ ...d, part: d.valeur / max.get(d.mesure) }));
+
+const ias = Array.from(rollup, ([modele, m]) => ({ modele, wh: m.wh }))
+    .sort((a, b) => b.wh - a.wh)
+    .map((d) => d.modele);
+
+const TOP_N_DEFAUT = 10;
+const iasParDefaut = ias.slice(0, TOP_N_DEFAUT);
+
+const options = [
+    { value: "toutes", label: "Toutes les mesures" },
+    ...mesures.map((m) => ({ value: m, label: m })),
+];
 ---
 
 <Layout>
-    <div class="flex flex-col gap-10 text-marron-fonce">
-        {METRICS.map((m) => <PlotFigure options={buildOptions(m)} />)}
+    <div
+        class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+    >
+        <!-- Hero -->
+        <h1 class="text-marron-fonce">
+            Combien consomme une requête à une IA ?
+        </h1>
+        <p class="text-vert-fonce uppercase mb-8">
+            Énergie, eau et tokens générés par requête, selon le modèle
+        </p>
     </div>
+
+    <div class="m-10 mb-16 flex flex-col gap-4">
+        <!-- Filtre mesure -->
+        <div class="flex items-center gap-3">
+            <label
+                for="select-mesure"
+                class="text-sm font-medium text-vert-fonce"
+            >
+                Mesure affichée :
+            </label>
+            <select
+                id="select-mesure"
+                class="rounded border border-vert-fonce bg-white px-3 py-1.5 text-sm text-vert-fonce focus:outline-none focus:ring-2 focus:ring-marron-clair"
+            >
+                {options.map((o) => <option value={o.value}>{o.label}</option>)}
+            </select>
+        </div>
+
+        <!-- Filtre IA -->
+        <fieldset class="flex flex-col gap-3">
+            <legend class="mb-1 text-sm font-medium text-vert-fonce">
+                IA affichées (<span id="compteur-ia"></span> / {ias.length}) :
+            </legend>
+
+            <!-- Recherche + raccourcis -->
+            <div class="flex flex-wrap items-center gap-3">
+                <input
+                    type="search"
+                    id="recherche-ia"
+                    placeholder="Rechercher une IA…"
+                    class="w-56 rounded border border-vert-fonce bg-white px-3 py-1.5 text-sm text-vert-fonce placeholder:text-vert-fonce/50 focus:outline-none focus:ring-2 focus:ring-marron-clair"
+                />
+                <button
+                    type="button"
+                    id="ia-top"
+                    class="text-sm text-marron-fonce underline underline-offset-2 hover:text-vert-fonce"
+                >
+                    Top {TOP_N_DEFAUT} énergivores
+                </button>
+                <button
+                    type="button"
+                    id="ia-tout"
+                    class="text-sm text-marron-fonce underline underline-offset-2 hover:text-vert-fonce"
+                >
+                    Tout sélectionner
+                </button>
+                <button
+                    type="button"
+                    id="ia-aucune"
+                    class="text-sm text-marron-fonce underline underline-offset-2 hover:text-vert-fonce"
+                >
+                    Tout désélectionner
+                </button>
+            </div>
+
+            <!-- Pastilles (zone scrollable car potentiellement nombreuses) -->
+            <div
+                class="flex max-h-44 flex-wrap gap-2 overflow-y-auto rounded border border-vert-fonce/15 p-2"
+                id="filtre-ia"
+            >
+                {
+                    ias.map((ia) => (
+                        <label class="cursor-pointer select-none" data-ia={ia}>
+                            <input
+                                type="checkbox"
+                                name="ia"
+                                value={ia}
+                                checked={iasParDefaut.includes(ia)}
+                                class="peer sr-only"
+                            />
+                            <span class="inline-block rounded-full border border-vert-fonce px-3 py-1 text-sm text-vert-fonce transition peer-checked:bg-vert-fonce peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-marron-clair hover:bg-marron-clair/40 peer-checked:hover:bg-vert-fonce/90">
+                                {ia}
+                            </span>
+                        </label>
+                    ))
+                }
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="chart-impact" class="w-full overflow-x-auto px-10"></div>
+
+    <p class="text-xs text-marron-fonce p-10 pt-3">
+        * Eau estimée avec un profil de datacenter par défaut (fournisseur non
+        identifié).
+    </p>
+    <figcaption
+        class="mt-4 border-t border-vert-fonce/15 pt-3 text-xs text-marron-fonce p-10"
+    >
+        <p>
+            <strong>Sources :</strong>
+            <a
+                href="https://huggingface.co/AIEnergyScore"
+                class="underline underline-offset-2 hover:text-vert-fonce"
+                target="_blank"
+                rel="noopener noreferrer">AI Energy Score</a
+            >,
+            <a
+                href="https://ecologits.ai"
+                class="underline underline-offset-2 hover:text-vert-fonce"
+                target="_blank"
+                rel="noopener noreferrer">EcoLogits</a
+            >.
+        </p>
+        <p class="mt-1">
+            Méthodologie : moyennes pondérées par le nombre de conversations.
+            Eau calculée avec le PUE et le WUE de chaque fournisseur.
+        </p>
+    </figcaption>
 </Layout>
+<script
+    is:inline
+    type="application/json"
+    id="chart-data"
+    set:html={JSON.stringify({ long, mesures, top: iasParDefaut })}
+/>
+
+<script>
+    import * as Plot from "@observablehq/plot";
+
+    const el = document.getElementById("chart-impact");
+    const select = document.getElementById(
+        "select-mesure",
+    ) as HTMLSelectElement;
+    const recherche = document.getElementById(
+        "recherche-ia",
+    ) as HTMLInputElement;
+    const compteur = document.getElementById("compteur-ia");
+    const labels = Array.from(
+        document.querySelectorAll<HTMLLabelElement>("#filtre-ia label"),
+    );
+    const checkboxes = Array.from(
+        document.querySelectorAll<HTMLInputElement>('input[name="ia"]'),
+    );
+    const { long, mesures, top } = JSON.parse(
+        document.getElementById("chart-data").textContent,
+    );
+
+    const couleurs = ["#394030", "#61453a", "#dbbfa7"];
+
+    const iasSelectionnees = () =>
+        checkboxes.filter((c) => c.checked).map((c) => c.value);
+
+    function render() {
+        const width = el.clientWidth;
+        const choix = select.value;
+        const selection = choix === "toutes" ? mesures : [choix];
+        const iasChoisies = iasSelectionnees();
+
+        compteur.textContent = String(iasChoisies.length);
+
+        if (iasChoisies.length === 0) {
+            el.replaceChildren(
+                Object.assign(document.createElement("p"), {
+                    className: "py-12 text-center text-sm text-marron-fonce",
+                    textContent:
+                        "Sélectionnez au moins une IA pour afficher le graphique.",
+                }),
+            );
+            return;
+        }
+
+        const data = long.filter(
+            (d) =>
+                selection.includes(d.mesure) && iasChoisies.includes(d.modele),
+        );
+
+        const mesureTri = choix === "toutes" ? mesures[1] : choix;
+        const ordre = data
+            .filter((d) => d.mesure === mesureTri)
+            .sort((a, b) => b.valeur - a.valeur)
+            .map((d) => d.modele);
+
+        const height = Math.max(180, ordre.length * selection.length * 28 + 60);
+
+        const chart = Plot.plot({
+            width,
+            height,
+            marginLeft: 200,
+            marginRight: 110,
+            style: {
+                background: "#fff1df",
+                color: "#394030",
+                fontSize: "12px",
+            },
+            fy: { label: null, axis: "left", padding: 0.25, domain: ordre },
+            y: { axis: null, domain: selection, padding: 0.1 },
+            x: { axis: null, domain: [0, 1] },
+            color: {
+                legend: true,
+                domain: mesures,
+                range: couleurs,
+            },
+            marks: [
+                Plot.barX(data, {
+                    fy: "modele",
+                    y: "mesure",
+                    x: "part",
+                    fill: "mesure",
+                    title: (d) =>
+                        `${d.modele}\n${d.mesure} : ${d.texte}\n${d.nb.toLocaleString("fr-FR")} conversations${d.eauEstimee ? "\n(eau estimée : datacenter inconnu)" : ""}`,
+                }),
+                Plot.text(data, {
+                    fy: "modele",
+                    y: "mesure",
+                    x: "part",
+                    text: "texte",
+                    textAnchor: "start",
+                    dx: 6,
+                    fill: "#394030",
+                }),
+                Plot.ruleX([0], { stroke: "#394030" }),
+            ],
+        });
+        el.replaceChildren(chart);
+    }
+
+    function filtrerPastilles() {
+        const q = recherche.value.trim().toLowerCase();
+        labels.forEach((l) => {
+            const visible = l.dataset.ia.toLowerCase().includes(q);
+            l.classList.toggle("hidden", !visible);
+        });
+    }
+
+    select.addEventListener("change", render);
+    checkboxes.forEach((c) => c.addEventListener("change", render));
+    recherche.addEventListener("input", filtrerPastilles);
+
+    document.getElementById("ia-top").addEventListener("click", () => {
+        checkboxes.forEach((c) => (c.checked = top.includes(c.value)));
+        render();
+    });
+
+    document.getElementById("ia-tout").addEventListener("click", () => {
+        labels.forEach((l) => {
+            if (!l.classList.contains("hidden"))
+                l.querySelector("input").checked = true;
+        });
+        render();
+    });
+    document.getElementById("ia-aucune").addEventListener("click", () => {
+        labels.forEach((l) => {
+            if (!l.classList.contains("hidden"))
+                l.querySelector("input").checked = false;
+        });
+        render();
+    });
+
+    render();
+    new ResizeObserver(() => render()).observe(el);
+</script>
