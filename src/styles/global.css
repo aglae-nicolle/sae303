@@ -1,1 +1,58 @@
+<<<<<<< HEAD
 @import "tailwindcss";
+=======
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('/fonts/Fredoka.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('/fonts/Lexend.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-beige: #fff1df;
+  --color-vert-fonce: #394030;
+  --color-marron-fonce: #61453a;
+  --color-marron-clair: #dbbfa7;
+  --color-vert-clair: #dad09e;
+  --color-orange:#ff9b47;
+
+
+  --font-fredoka: 'Fredoka', sans-serif;
+  --font-lexend: 'Lexend', sans-serif; 
+}
+
+@layer base {
+  h1, h2, h3  {
+    font-family: var(--font-fredoka);
+  } 
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: xx-large;
+  }
+
+  h3 {
+    font-size: x-large;
+  }
+
+  body {
+    font-family: var(--font-lexend);
+  } 
+
+}
+>>>>>>> 2af884976ad39019fa90c947da3766e45853ae4f

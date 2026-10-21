@@ -1,10 +1,16 @@
 {
+<<<<<<< HEAD
   "name": "sae303",
   "type": "module",
   "version": "0.0.1",
   "engines": {
     "node": ">=22.22.0"
   },
+=======
+  "name": "base-astro-tw-plot",
+  "type": "module",
+  "version": "0.0.1",
+>>>>>>> 2af884976ad39019fa90c947da3766e45853ae4f
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -12,8 +18,20 @@
     "astro": "astro"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.0",
     "tailwindcss": "^4.3.3"
+=======
+    "@astrojs/netlify": "^8.2.3",
+    "@observablehq/plot": "^0.6.17",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.4",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0"
+>>>>>>> 2af884976ad39019fa90c947da3766e45853ae4f
   }
 }

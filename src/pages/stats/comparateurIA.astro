@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import * as Plot from "@observablehq/plot";
+import PlotFigure from "../../components/PlotFigure.astro";
+import penguins from "../../assets/penguins.json";
+
+export function getImpactData() {
+    return penguins
+        .filter(
+            (d) =>
+                typeof d.body_mass_g === "number" &&
+                typeof d.culmen_length_mm === "number",
+        )
+        .slice(0, 8)
+        .map((d, i) => ({
+            model: `${d.species} #${i + 1}`,
+            waterMlPerToken: d.culmen_length_mm / 1000,
+            energyWhPerToken: d.body_mass_g / 1_000_000,
+        }));
+}
+
+const data = getImpactData();
+
+const METRICS = [
+    {
+        key: "waterMlPerToken",
+        title: "Consommation d'eau par token",
+        unit: "mL / token",
+        color: "var(--color-vert-fonce)",
+    },
+    {
+        key: "energyWhPerToken",
+        title: "Consommation d'électricité par token",
+        unit: "Wh / token",
+        color: "var(--color-marron-fonce)",
+    },
+];
+
+function buildOptions(metric: (typeof METRICS)[number]) {
+    return {
+        title: metric.title,
+        subtitle: `Unité : ${metric.unit}`,
+        ariaLabel: `Diagramme à barres : ${metric.title.toLowerCase()} pour chaque modèle, en ${metric.unit}`,
+        width: 720,
+        height: 60 + data.length * 36,
+        marginLeft: 140,
+        grid: true,
+        x: { label: `${metric.unit} →` },
+        y: { label: null },
+        marks: [
+            Plot.frame({ stroke: "var(--color-marron-fonce)" }),
+            Plot.barX(data, {
+                y: "model",
+                x: metric.key,
+                fill: metric.color,
+                sort: { y: "-x" },
+            }),
+            Plot.text(data, {
+                y: "model",
+                x: metric.key,
+                text: (d: any) => d[metric.key].toPrecision(2),
+                dx: 6,
+                textAnchor: "start",
+                fill: "var(--color-marron-fonce)",
+            }),
+            Plot.ruleX([0], { stroke: "var(--color-marron-fonce)" }),
+        ],
+        style: {
+            background: "transparent",
+            color: "var(--color-marron-fonce)",
+            fontFamily: "system-ui, sans-serif",
+        },
+    };
+}
+---
+
+<Layout>
+    <div class="flex flex-col gap-10 text-marron-fonce">
+        {METRICS.map((m) => <PlotFigure options={buildOptions(m)} />)}
+    </div>
+</Layout>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Astro Starter Kit: Basics
 
 ```sh
@@ -44,3 +45,16 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+=======
+- URL site WEB :
+- URL Notebook Observable :
+- Nom :
+- Prénom :
+- Nom binome :
+- Prénom binome :
+
+# Remarques :
+
+Décrire ici les éléments techniques remarquables de votre site (interactions, navigation, responsive, accessibilité...).
+Idéalement avec des liens vers votre site et/ou [votre code](https://github.blog/news-insights/product-news/relative-links-in-markup-files/)
+>>>>>>> 2af884976ad39019fa90c947da3766e45853ae4f
