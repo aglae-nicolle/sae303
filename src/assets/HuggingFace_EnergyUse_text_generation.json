@@ -1,0 +1,436 @@
+[
+  {
+    "model": "berkeley-nest/Starling-LM-7B-alpha",
+    "total_gpu_energy": 0.019011,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "distilbert/distilgpt2",
+    "total_gpu_energy": 0.001313,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "Salesforce/xLAM-7b-r",
+    "total_gpu_energy": 0.01917,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "openai-community/gpt2",
+    "total_gpu_energy": 0.002146,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "openai-community/gpt2-xl",
+    "total_gpu_energy": 0.008921,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "openai-community/gpt2-medium",
+    "total_gpu_energy": 0.003956,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "openai-community/gpt2-large",
+    "total_gpu_energy": 0.006121,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "openai-community/openai-gpt",
+    "total_gpu_energy": 0.002704,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "microsoft/phi-1",
+    "total_gpu_energy": 0.006393,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "microsoft/phi-1_5",
+    "total_gpu_energy": 0.00629,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "microsoft/phi-2",
+    "total_gpu_energy": 0.009864,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "microsoft/phi-4",
+    "total_gpu_energy": 0.028741,
+    "energy_score": 1,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "CohereForAI/aya-23-8B",
+    "total_gpu_energy": 0.017817,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "allenai/OLMo-1.7-7B-hf",
+    "total_gpu_energy": 0.016831,
+    "energy_score": 3,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "allenai/OLMo-1B-hf",
+    "total_gpu_energy": 0.005594,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "facebook/opt-2.7b",
+    "total_gpu_energy": 0.00806,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "facebook/opt-125m",
+    "total_gpu_energy": 0.001944,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "mistralai/Mistral-7B-v0.1",
+    "total_gpu_energy": 0.01913,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "mistralai/Ministral-8B-Instruct-2410",
+    "total_gpu_energy": 0.020875,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "tiiuae/falcon-7b",
+    "total_gpu_energy": 0.015875,
+    "energy_score": 3,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Meta-Llama-3-8B",
+    "total_gpu_energy": 0.017333,
+    "energy_score": 3,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Llama-2-7b-hf",
+    "total_gpu_energy": 0.016441,
+    "energy_score": 3,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Meta-Llama-3.1-8B",
+    "total_gpu_energy": 0.017376,
+    "energy_score": 3,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Llama-2-13b-hf",
+    "total_gpu_energy": 0.026102,
+    "energy_score": 1,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "total_gpu_energy": 0.007708,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM-1.7B",
+    "total_gpu_energy": 0.007645,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM-135M",
+    "total_gpu_energy": 0.00728,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM-360M",
+    "total_gpu_energy": 0.008095,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "google/gemma-2b",
+    "total_gpu_energy": 0.00868,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "google/gemma-7b",
+    "total_gpu_energy": 0.0189,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "google/gemma-2-2b-it",
+    "total_gpu_energy": 0.018639,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "01-ai/Yi-1.5-9B",
+    "total_gpu_energy": 0.023001,
+    "energy_score": 2,
+    "class": "A",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "mistralai/Mixtral-8x7B-v0.1",
+    "total_gpu_energy": 0.61539,
+    "energy_score": 1,
+    "class": "B",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "Qwen/QwQ-32B-Preview",
+    "total_gpu_energy": 0.054556,
+    "energy_score": 5,
+    "class": "B",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "01-ai/Yi-1.5-34B",
+    "total_gpu_energy": 0.056079,
+    "energy_score": 5,
+    "class": "B",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "CohereForAI/c4ai-command-r-plus",
+    "total_gpu_energy": 3.426382,
+    "energy_score": 1,
+    "class": "C",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "crm-sf/TextBase-70B",
+    "total_gpu_energy": 1.721556,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Meta-Llama-3-70B",
+    "total_gpu_energy": 1.719656,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "meta-llama/Llama-2-70b-hf",
+    "total_gpu_energy": 1.648505,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "Qwen/Qwen2.5-72B-Instruct",
+    "total_gpu_energy": 1.869553,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Feb 25"
+  },
+  {
+    "model": "google/gemma-3-4b-pt",
+    "total_gpu_energy": 0.0343867,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "google/gemma-3-270m",
+    "total_gpu_energy": 0.00929,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-0.6B",
+    "total_gpu_energy": 0.01183,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "tencent/Hunyuan-1.8B-Instruct",
+    "total_gpu_energy": 0.0042,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "mistralai/Mistral-Nemo-Instruct-2407",
+    "total_gpu_energy": 0.02319,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen2.5-Coder-14B",
+    "total_gpu_energy": 0.02712,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "microsoft/Phi-4-reasoning-plus",
+    "total_gpu_energy": 0.01842,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "google/gemma-3-1b-pt",
+    "total_gpu_energy": 0.01233,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "ibm-granite/granite-4.0-micro",
+    "total_gpu_energy": 0.01663,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "HuggingFaceTB/SmolLM3-3B",
+    "total_gpu_energy": 0.01835,
+    "energy_score": 5,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "ibm-granite/*granite-4.0-h-tiny",
+    "total_gpu_energy": 0.08182,
+    "energy_score": 1,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "swiss-ai/Apertus-8B-Instruct-2509",
+    "total_gpu_energy": 0.02174,
+    "energy_score": 4,
+    "class": "A",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "google/gemma-3-27b-pt",
+    "total_gpu_energy": 0.05041,
+    "energy_score": 2,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-30B-A3B",
+    "total_gpu_energy": 0.03738,
+    "energy_score": 5,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "LGAI-EXAONE/EXAONE-4.0-32B",
+    "total_gpu_energy": 0.05448,
+    "energy_score": 1,
+    "class": "B",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "zai-org/GLM-4.5-Air",
+    "total_gpu_energy": 0.22055,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "Qwen/Qwen3-235B-A22B",
+    "total_gpu_energy": 0.30581,
+    "energy_score": 4,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+    "total_gpu_energy": 0.03664,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "zai-org/GLM-4.5",
+    "total_gpu_energy": 1.22542,
+    "energy_score": 1,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "zai-org/GLM-4.6",
+    "total_gpu_energy": 1.27355,
+    "energy_score": 1,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "swiss-ai/Apertus-70B-Instruct-2509",
+    "total_gpu_energy": 0.69752,
+    "energy_score": 3,
+    "class": "C",
+    "test date": "Dec 25"
+  },
+  {
+    "model": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+    "total_gpu_energy": 0.04953,
+    "energy_score": 5,
+    "class": "C",
+    "test date": "Dec 25"
+  }
+]

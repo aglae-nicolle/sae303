@@ -1,0 +1,92 @@
+[
+  {
+    "model": "distilbert/distilbert-base-cased-distilled-squad",
+    "total_gpu_energy": 0.000239971,
+    "energy_score": 5
+  },
+  {
+    "model": "csarron/mobilebert-uncased-squad-v2",
+    "total_gpu_energy": 0.000936525,
+    "energy_score": 5
+  },
+  {
+    "model": "Intel/dynamic_tinybert",
+    "total_gpu_energy": 0.000208572,
+    "energy_score": 5
+  },
+  {
+    "model": "Falconsai/question_answering_v2",
+    "total_gpu_energy": 0.00022546,
+    "energy_score": 5
+  },
+  {
+    "model": "allenai/longformer-large-4096-finetuned-triviaqa",
+    "total_gpu_energy": 0.003970963,
+    "energy_score": 5
+  },
+  {
+    "model": "mrm8488/longformer-base-4096-finetuned-squadv2",
+    "total_gpu_energy": 0.001792351,
+    "energy_score": 5
+  },
+  {
+    "model": "mrm8488/bert-tiny-finetuned-squadv2",
+    "total_gpu_energy": 0.0000554,
+    "energy_score": 5
+  },
+  {
+    "model": "deepset/deberta-v3-large-squad2",
+    "total_gpu_energy": 0.001876685,
+    "energy_score": 5
+  },
+  {
+    "model": "deepset/minilm-uncased-squad2",
+    "total_gpu_energy": 0.000252815,
+    "energy_score": 5
+  },
+  {
+    "model": "deepset/bert-large-uncased-whole-word-masking-squad2",
+    "total_gpu_energy": 0.001047537,
+    "energy_score": 5
+  },
+  {
+    "model": "deepset/deberta-v3-base-squad2",
+    "total_gpu_energy": 0.000812482,
+    "energy_score": 5
+  },
+  {
+    "model": "deepset/electra-base-squad2",
+    "total_gpu_energy": 0.000468621,
+    "energy_score": 5
+  },
+  {
+    "model": "timpal0l/mdeberta-v3-base-squad2",
+    "total_gpu_energy": 0.00085768,
+    "energy_score": 5
+  },
+  {
+    "model": "google-t5/t5-large",
+    "total_gpu_energy": 0.072278456,
+    "energy_score": 3
+  },
+  {
+    "model": "google-t5/t5-11b",
+    "total_gpu_energy": 0.178130109,
+    "energy_score": 1
+  },
+  {
+    "model": "google-t5/t5-3b",
+    "total_gpu_energy": 0.087697858,
+    "energy_score": 3
+  },
+  {
+    "model": "google-t5/t5-base",
+    "total_gpu_energy": 0.03436275,
+    "energy_score": 5
+  },
+  {
+    "model": "google-t5/t5-small",
+    "total_gpu_energy": 0.020635069,
+    "energy_score": 5
+  }
+]
