@@ -1,0 +1,1073 @@
+[
+  {
+    "model_name": "Apertus-70B-Instruct-2509",
+    "nb_conversations": 7307,
+    "nb_valeurs_output_tokens": 7307,
+    "moyenne_output_tokens": 897.5611057889695,
+    "nb_valeurs_kwh": 7307,
+    "moyenne_kwh": 0.0005901724498959478,
+    "kwh_pour_1000_tokens": 0.0006575289928335045
+  },
+  {
+    "model_name": "Apertus-8B-Instruct-2509",
+    "nb_conversations": 155,
+    "nb_valeurs_output_tokens": 155,
+    "moyenne_output_tokens": 554.0516129032258,
+    "nb_valeurs_kwh": 155,
+    "moyenne_kwh": 0.00004939513326613003,
+    "kwh_pour_1000_tokens": 0.00008915258455308873
+  },
+  {
+    "model_name": "DeepSeek-V3.2",
+    "nb_conversations": 6483,
+    "nb_valeurs_output_tokens": 6483,
+    "moyenne_output_tokens": 1129.6058923337962,
+    "nb_valeurs_kwh": 6483,
+    "moyenne_kwh": 0.004494589898471757,
+    "kwh_pour_1000_tokens": 0.003978900897184427
+  },
+  {
+    "model_name": "EuroLLM-22B-Instruct-2512",
+    "nb_conversations": 3457,
+    "nb_valeurs_output_tokens": 3457,
+    "moyenne_output_tokens": 696.5091119467746,
+    "nb_valeurs_kwh": 3457,
+    "moyenne_kwh": 0.00007392742696490217,
+    "kwh_pour_1000_tokens": 0.00010613992795912123
+  },
+  {
+    "model_name": "Qwen3-Coder-480B-A35B-Instruct",
+    "nb_conversations": 1823,
+    "nb_valeurs_output_tokens": 1823,
+    "moyenne_output_tokens": 984.1475589687328,
+    "nb_valeurs_kwh": 1823,
+    "moyenne_kwh": 0.0019197001111366202,
+    "kwh_pour_1000_tokens": 0.0019506222350927059
+  },
+  {
+    "model_name": "Yi-1.5-9B-Chat",
+    "nb_conversations": 129,
+    "nb_valeurs_output_tokens": 129,
+    "moyenne_output_tokens": 687.5116279069767,
+    "nb_valeurs_kwh": 129,
+    "moyenne_kwh": 0.00006212765254670104,
+    "kwh_pour_1000_tokens": 0.00009036596622494823
+  },
+  {
+    "model_name": "aya-expanse-32b",
+    "nb_conversations": 10521,
+    "nb_valeurs_output_tokens": 10521,
+    "moyenne_output_tokens": 805.1107309191142,
+    "nb_valeurs_kwh": 10521,
+    "moyenne_kwh": 0.0000952234610260164,
+    "kwh_pour_1000_tokens": 0.00011827374467771573
+  },
+  {
+    "model_name": "aya-expanse-8b",
+    "nb_conversations": 2209,
+    "nb_valeurs_output_tokens": 2209,
+    "moyenne_output_tokens": 866.2797645993662,
+    "nb_valeurs_kwh": 2209,
+    "moyenne_kwh": 0.00007723107996007459,
+    "kwh_pour_1000_tokens": 0.00008915258455308849
+  },
+  {
+    "model_name": "c4ai-command-r-08-2024",
+    "nb_conversations": 12314,
+    "nb_valeurs_output_tokens": 12314,
+    "moyenne_output_tokens": 740.3686048400195,
+    "nb_valeurs_kwh": 0,
+    "moyenne_kwh": "",
+    "kwh_pour_1000_tokens": ""
+  },
+  {
+    "model_name": "chocolatine-14b-instruct-dpo-v1.2-q4",
+    "nb_conversations": 627,
+    "nb_valeurs_output_tokens": 627,
+    "moyenne_output_tokens": 424.04944178628386,
+    "nb_valeurs_kwh": 627,
+    "moyenne_kwh": 0.00004089230663729604,
+    "kwh_pour_1000_tokens": 0.00009643287458424552
+  },
+  {
+    "model_name": "chocolatine-2-14b-instruct-v2.0.3-q8",
+    "nb_conversations": 3219,
+    "nb_valeurs_output_tokens": 3219,
+    "moyenne_output_tokens": 350.7427772600186,
+    "nb_valeurs_kwh": 3219,
+    "moyenne_kwh": 0.000030844040248594576,
+    "kwh_pour_1000_tokens": 0.00008793920288122923
+  },
+  {
+    "model_name": "claude-3-5-sonnet-v2",
+    "nb_conversations": 11071,
+    "nb_valeurs_output_tokens": 11071,
+    "moyenne_output_tokens": 662.6459217776172,
+    "nb_valeurs_kwh": 11071,
+    "moyenne_kwh": 0.002604769092606099,
+    "kwh_pour_1000_tokens": 0.003930861123567369
+  },
+  {
+    "model_name": "claude-3-7-sonnet",
+    "nb_conversations": 11934,
+    "nb_valeurs_output_tokens": 11934,
+    "moyenne_output_tokens": 1855.004357298475,
+    "nb_valeurs_kwh": 11934,
+    "moyenne_kwh": 0.0072917645121526875,
+    "kwh_pour_1000_tokens": 0.003930861123567391
+  },
+  {
+    "model_name": "claude-4-5-sonnet",
+    "nb_conversations": 17574,
+    "nb_valeurs_output_tokens": 17574,
+    "moyenne_output_tokens": 1676.6815181518152,
+    "nb_valeurs_kwh": 17574,
+    "moyenne_kwh": 0.0065908021963069,
+    "kwh_pour_1000_tokens": 0.003930861123567378
+  },
+  {
+    "model_name": "claude-4-6-sonnet",
+    "nb_conversations": 9114,
+    "nb_valeurs_output_tokens": 9114,
+    "moyenne_output_tokens": 1798.4138687733157,
+    "nb_valeurs_kwh": 9114,
+    "moyenne_kwh": 0.007069315160845407,
+    "kwh_pour_1000_tokens": 0.003930861123567365
+  },
+  {
+    "model_name": "claude-4-sonnet",
+    "nb_conversations": 5466,
+    "nb_valeurs_output_tokens": 5466,
+    "moyenne_output_tokens": 1006.7799121844128,
+    "nb_valeurs_kwh": 5466,
+    "moyenne_kwh": 0.003957512016794282,
+    "kwh_pour_1000_tokens": 0.003930861123567372
+  },
+  {
+    "model_name": "command-a",
+    "nb_conversations": 14605,
+    "nb_valeurs_output_tokens": 14605,
+    "moyenne_output_tokens": 1023.5950701814447,
+    "nb_valeurs_kwh": 14605,
+    "moyenne_kwh": 0.0008767333211662212,
+    "kwh_pour_1000_tokens": 0.000856523587018458
+  },
+  {
+    "model_name": "deepseek-chat-v3.1",
+    "nb_conversations": 3782,
+    "nb_valeurs_output_tokens": 3782,
+    "moyenne_output_tokens": 1369.1179270227392,
+    "nb_valeurs_kwh": 3782,
+    "moyenne_kwh": 0.005447584548182067,
+    "kwh_pour_1000_tokens": 0.003978900897184431
+  },
+  {
+    "model_name": "deepseek-r1",
+    "nb_conversations": 7809,
+    "nb_valeurs_output_tokens": 7809,
+    "moyenne_output_tokens": 1158.0878473556154,
+    "nb_valeurs_kwh": 7809,
+    "moyenne_kwh": 0.004607916774861651,
+    "kwh_pour_1000_tokens": 0.003978900897184437
+  },
+  {
+    "model_name": "deepseek-r1-0528",
+    "nb_conversations": 4261,
+    "nb_valeurs_output_tokens": 4261,
+    "moyenne_output_tokens": 2118.6259094109364,
+    "nb_valeurs_kwh": 4261,
+    "moyenne_kwh": 0.00842980253175337,
+    "kwh_pour_1000_tokens": 0.003978900897184438
+  },
+  {
+    "model_name": "deepseek-r1-distill-llama-70b",
+    "nb_conversations": 5379,
+    "nb_valeurs_output_tokens": 5379,
+    "moyenne_output_tokens": 938.1308793456033,
+    "nb_valeurs_kwh": 5379,
+    "moyenne_kwh": 0.0006168482522421248,
+    "kwh_pour_1000_tokens": 0.0006575289928335048
+  },
+  {
+    "model_name": "deepseek-v3-0324",
+    "nb_conversations": 11762,
+    "nb_valeurs_output_tokens": 11762,
+    "moyenne_output_tokens": 1218.4396361163067,
+    "nb_valeurs_kwh": 11762,
+    "moyenne_kwh": 0.004848050561308238,
+    "kwh_pour_1000_tokens": 0.003978900897184425
+  },
+  {
+    "model_name": "deepseek-v3-chat",
+    "nb_conversations": 10549,
+    "nb_valeurs_output_tokens": 10549,
+    "moyenne_output_tokens": 1147.2070338420704,
+    "nb_valeurs_kwh": 10549,
+    "moyenne_kwh": 0.004564623096210471,
+    "kwh_pour_1000_tokens": 0.003978900897184403
+  },
+  {
+    "model_name": "deepseek-v4-flash",
+    "nb_conversations": 561,
+    "nb_valeurs_output_tokens": 561,
+    "moyenne_output_tokens": 1751.1408199643495,
+    "nb_valeurs_kwh": 561,
+    "moyenne_kwh": 0.002667883854322966,
+    "kwh_pour_1000_tokens": 0.0015235118865981779
+  },
+  {
+    "model_name": "deepseek-v4-pro",
+    "nb_conversations": 603,
+    "nb_valeurs_output_tokens": 603,
+    "moyenne_output_tokens": 2494.439469320066,
+    "nb_valeurs_kwh": 603,
+    "moyenne_kwh": 0.022174765963532034,
+    "kwh_pour_1000_tokens": 0.008889678918356927
+  },
+  {
+    "model_name": "gemini-1.5-pro",
+    "nb_conversations": 14485,
+    "nb_valeurs_output_tokens": 14485,
+    "moyenne_output_tokens": 892.8335519502934,
+    "nb_valeurs_kwh": 14485,
+    "moyenne_kwh": 0.009896581335651536,
+    "kwh_pour_1000_tokens": 0.011084463967593489
+  },
+  {
+    "model_name": "gemini-2.0-flash",
+    "nb_conversations": 17738,
+    "nb_valeurs_output_tokens": 17738,
+    "moyenne_output_tokens": 1581.1469162250535,
+    "nb_valeurs_kwh": 17738,
+    "moyenne_kwh": 0.006215268943637497,
+    "kwh_pour_1000_tokens": 0.003930861123567371
+  },
+  {
+    "model_name": "gemini-2.5-flash",
+    "nb_conversations": 8165,
+    "nb_valeurs_output_tokens": 8165,
+    "moyenne_output_tokens": 1342.0662584200857,
+    "nb_valeurs_kwh": 8165,
+    "moyenne_kwh": 0.005275476080475038,
+    "kwh_pour_1000_tokens": 0.003930861123567372
+  },
+  {
+    "model_name": "gemini-3-flash-preview",
+    "nb_conversations": 6318,
+    "nb_valeurs_output_tokens": 6318,
+    "moyenne_output_tokens": 1098.6438746438746,
+    "nb_valeurs_kwh": 6318,
+    "moyenne_kwh": 0.004318616495483039,
+    "kwh_pour_1000_tokens": 0.003930861123567378
+  },
+  {
+    "model_name": "gemini-3-pro-preview",
+    "nb_conversations": 2797,
+    "nb_valeurs_output_tokens": 2797,
+    "moyenne_output_tokens": 1921.1784054343939,
+    "nb_valeurs_kwh": 2797,
+    "moyenne_kwh": 0.00824094588340902,
+    "kwh_pour_1000_tokens": 0.0042895266051804675
+  },
+  {
+    "model_name": "gemini-3.1-flash-lite-preview",
+    "nb_conversations": 6888,
+    "nb_valeurs_output_tokens": 6888,
+    "moyenne_output_tokens": 571.2338850174216,
+    "nb_valeurs_kwh": 6888,
+    "moyenne_kwh": 0.0005016807806626782,
+    "kwh_pour_1000_tokens": 0.0008782405837976117
+  },
+  {
+    "model_name": "gemini-3.1-pro-preview",
+    "nb_conversations": 6169,
+    "nb_valeurs_output_tokens": 6169,
+    "moyenne_output_tokens": 2097.679526665586,
+    "nb_valeurs_kwh": 6169,
+    "moyenne_kwh": 0.008998052138774394,
+    "kwh_pour_1000_tokens": 0.004289526605180465
+  },
+  {
+    "model_name": "gemma-2-27b-it-q8",
+    "nb_conversations": 1718,
+    "nb_valeurs_output_tokens": 1718,
+    "moyenne_output_tokens": 626.1641443538999,
+    "nb_valeurs_kwh": 1718,
+    "moyenne_kwh": 0.00007025989765398086,
+    "kwh_pour_1000_tokens": 0.00011220683631841889
+  },
+  {
+    "model_name": "gemma-2-9b-it",
+    "nb_conversations": 9772,
+    "nb_valeurs_output_tokens": 9772,
+    "moyenne_output_tokens": 632.9994883340156,
+    "nb_valeurs_kwh": 9772,
+    "moyenne_kwh": 0.00005720161038320135,
+    "kwh_pour_1000_tokens": 0.00009036596622494853
+  },
+  {
+    "model_name": "gemma-3-12b",
+    "nb_conversations": 18544,
+    "nb_valeurs_output_tokens": 18544,
+    "moyenne_output_tokens": 1302.0369391716997,
+    "nb_valeurs_kwh": 18544,
+    "moyenne_kwh": 0.0001223994293430502,
+    "kwh_pour_1000_tokens": 0.00009400611124052709
+  },
+  {
+    "model_name": "gemma-3-27b",
+    "nb_conversations": 19074,
+    "nb_valeurs_output_tokens": 19074,
+    "moyenne_output_tokens": 1341.135786935095,
+    "nb_valeurs_kwh": 19074,
+    "moyenne_kwh": 0.00015048460372540074,
+    "kwh_pour_1000_tokens": 0.00011220683631841937
+  },
+  {
+    "model_name": "gemma-3-4b",
+    "nb_conversations": 20097,
+    "nb_valeurs_output_tokens": 20097,
+    "moyenne_output_tokens": 1231.9321291735084,
+    "nb_valeurs_kwh": 20097,
+    "moyenne_kwh": 0.00010385071784375173,
+    "kwh_pour_1000_tokens": 0.00008429905786565059
+  },
+  {
+    "model_name": "gemma-3n-e4b-it",
+    "nb_conversations": 10078,
+    "nb_valeurs_output_tokens": 10078,
+    "moyenne_output_tokens": 1148.7531256201628,
+    "nb_valeurs_kwh": 10078,
+    "moyenne_kwh": 0.00009683880621000148,
+    "kwh_pour_1000_tokens": 0.00008429905786565094
+  },
+  {
+    "model_name": "gemma-4-26b-a4b-it",
+    "nb_conversations": 1545,
+    "nb_valeurs_output_tokens": 1545,
+    "moyenne_output_tokens": 1096.0608414239482,
+    "nb_valeurs_kwh": 1545,
+    "moyenne_kwh": 0.0000923968962954714,
+    "kwh_pour_1000_tokens": 0.00008429905786565087
+  },
+  {
+    "model_name": "gemma-4-31b-it",
+    "nb_conversations": 1626,
+    "nb_valeurs_output_tokens": 1626,
+    "moyenne_output_tokens": 964.8351783517835,
+    "nb_valeurs_kwh": 1626,
+    "moyenne_kwh": 0.00011294395621868014,
+    "kwh_pour_1000_tokens": 0.00011706036300585657
+  },
+  {
+    "model_name": "glm-4.5",
+    "nb_conversations": 1710,
+    "nb_valeurs_output_tokens": 1710,
+    "moyenne_output_tokens": 2307.6035087719297,
+    "nb_valeurs_kwh": 1710,
+    "moyenne_kwh": 0.00436686253142229,
+    "kwh_pour_1000_tokens": 0.0018923799148434584
+  },
+  {
+    "model_name": "glm-4.6",
+    "nb_conversations": 1430,
+    "nb_valeurs_output_tokens": 1430,
+    "moyenne_output_tokens": 2135.6923076923076,
+    "nb_valeurs_kwh": 1430,
+    "moyenne_kwh": 0.004041541227362603,
+    "kwh_pour_1000_tokens": 0.0018923799148434606
+  },
+  {
+    "model_name": "glm-4.7",
+    "nb_conversations": 2883,
+    "nb_valeurs_output_tokens": 2883,
+    "moyenne_output_tokens": 3013.0412764481443,
+    "nb_valeurs_kwh": 2883,
+    "moyenne_kwh": 0.005701818794144758,
+    "kwh_pour_1000_tokens": 0.0018923799148434562
+  },
+  {
+    "model_name": "glm-5",
+    "nb_conversations": 2913,
+    "nb_valeurs_output_tokens": 2913,
+    "moyenne_output_tokens": 2857.0707174733952,
+    "nb_valeurs_kwh": 2913,
+    "moyenne_kwh": 0.011700806096477948,
+    "kwh_pour_1000_tokens": 0.004095385537682935
+  },
+  {
+    "model_name": "glm-5.1",
+    "nb_conversations": 744,
+    "nb_valeurs_output_tokens": 744,
+    "moyenne_output_tokens": 3077.7163978494623,
+    "nb_valeurs_kwh": 744,
+    "moyenne_kwh": 0.01260443522484232,
+    "kwh_pour_1000_tokens": 0.00409538553768294
+  },
+  {
+    "model_name": "gpt-4.1-mini",
+    "nb_conversations": 18394,
+    "nb_valeurs_output_tokens": 18394,
+    "moyenne_output_tokens": 886.2032728063499,
+    "nb_valeurs_kwh": 18394,
+    "moyenne_kwh": 0.0006042104015894035,
+    "kwh_pour_1000_tokens": 0.000681796626270679
+  },
+  {
+    "model_name": "gpt-4.1-nano",
+    "nb_conversations": 13214,
+    "nb_valeurs_output_tokens": 13214,
+    "moyenne_output_tokens": 715.1274405933101,
+    "nb_valeurs_kwh": 13214,
+    "moyenne_kwh": 0.00007677129755562534,
+    "kwh_pour_1000_tokens": 0.00010735330963098204
+  },
+  {
+    "model_name": "gpt-4o-2024-08-06",
+    "nb_conversations": 10275,
+    "nb_valeurs_output_tokens": 10275,
+    "moyenne_output_tokens": 730.7468613138686,
+    "nb_valeurs_kwh": 10275,
+    "moyenne_kwh": 0.002872464428307573,
+    "kwh_pour_1000_tokens": 0.003930861123567384
+  },
+  {
+    "model_name": "gpt-4o-mini-2024-07-18",
+    "nb_conversations": 14663,
+    "nb_valeurs_output_tokens": 14663,
+    "moyenne_output_tokens": 865.926549819273,
+    "nb_valeurs_kwh": 14663,
+    "moyenne_kwh": 0.0000877065839967992,
+    "kwh_pour_1000_tokens": 0.00010128640127168338
+  },
+  {
+    "model_name": "gpt-5",
+    "nb_conversations": 3497,
+    "nb_valeurs_output_tokens": 3497,
+    "moyenne_output_tokens": 918.6685730626251,
+    "nb_valeurs_kwh": 3497,
+    "moyenne_kwh": 0.0028442480002565606,
+    "kwh_pour_1000_tokens": 0.00309605453332806
+  },
+  {
+    "model_name": "gpt-5-mini",
+    "nb_conversations": 5016,
+    "nb_valeurs_output_tokens": 5016,
+    "moyenne_output_tokens": 1121.289673046252,
+    "nb_valeurs_kwh": 5016,
+    "moyenne_kwh": 0.00022170058217943676,
+    "kwh_pour_1000_tokens": 0.0001977192758559294
+  },
+  {
+    "model_name": "gpt-5-nano",
+    "nb_conversations": 3672,
+    "nb_valeurs_output_tokens": 3672,
+    "moyenne_output_tokens": 1245.18545751634,
+    "nb_valeurs_kwh": 3672,
+    "moyenne_kwh": 0.00010496796093663693,
+    "kwh_pour_1000_tokens": 0.00008429905786565091
+  },
+  {
+    "model_name": "gpt-5.1",
+    "nb_conversations": 2180,
+    "nb_valeurs_output_tokens": 2180,
+    "moyenne_output_tokens": 1142.5105504587157,
+    "nb_valeurs_kwh": 2180,
+    "moyenne_kwh": 0.00353727496912284,
+    "kwh_pour_1000_tokens": 0.0030960545333280566
+  },
+  {
+    "model_name": "gpt-5.2",
+    "nb_conversations": 3735,
+    "nb_valeurs_output_tokens": 3735,
+    "moyenne_output_tokens": 1036.5309236947792,
+    "nb_valeurs_kwh": 3735,
+    "moyenne_kwh": 0.003209156265239946,
+    "kwh_pour_1000_tokens": 0.003096054533328063
+  },
+  {
+    "model_name": "gpt-5.3",
+    "nb_conversations": 3300,
+    "nb_valeurs_output_tokens": 3300,
+    "moyenne_output_tokens": 510.0778787878788,
+    "nb_valeurs_kwh": 3300,
+    "moyenne_kwh": 0.0015792289289715716,
+    "kwh_pour_1000_tokens": 0.0030960545333280575
+  },
+  {
+    "model_name": "gpt-5.4",
+    "nb_conversations": 6185,
+    "nb_valeurs_output_tokens": 6185,
+    "moyenne_output_tokens": 1424.7382376717867,
+    "nb_valeurs_kwh": 6185,
+    "moyenne_kwh": 0.004411067279549562,
+    "kwh_pour_1000_tokens": 0.0030960545333280575
+  },
+  {
+    "model_name": "gpt-5.4-mini",
+    "nb_conversations": 2533,
+    "nb_valeurs_output_tokens": 2533,
+    "moyenne_output_tokens": 902.6194236083695,
+    "nb_valeurs_kwh": 2533,
+    "moyenne_kwh": 0.00017846525880934306,
+    "kwh_pour_1000_tokens": 0.00019771927585592925
+  },
+  {
+    "model_name": "gpt-5.4-nano",
+    "nb_conversations": 2314,
+    "nb_valeurs_output_tokens": 2314,
+    "moyenne_output_tokens": 1024.3547968885048,
+    "nb_valeurs_kwh": 2314,
+    "moyenne_kwh": 0.00008635214429786102,
+    "kwh_pour_1000_tokens": 0.00008429905786565079
+  },
+  {
+    "model_name": "gpt-5.5",
+    "nb_conversations": 1059,
+    "nb_valeurs_output_tokens": 1059,
+    "moyenne_output_tokens": 1619.7828139754486,
+    "nb_valeurs_kwh": 1059,
+    "moyenne_kwh": 0.005014935924215559,
+    "kwh_pour_1000_tokens": 0.0030960545333280536
+  },
+  {
+    "model_name": "gpt-oss-120b",
+    "nb_conversations": 5386,
+    "nb_valeurs_output_tokens": 5386,
+    "moyenne_output_tokens": 2758.3319717786853,
+    "nb_valeurs_kwh": 5386,
+    "moyenne_kwh": 0.0009434867838444284,
+    "kwh_pour_1000_tokens": 0.0003420497581500422
+  },
+  {
+    "model_name": "gpt-oss-20b",
+    "nb_conversations": 7584,
+    "nb_valeurs_output_tokens": 7584,
+    "moyenne_output_tokens": 1584.160864978903,
+    "nb_valeurs_kwh": 7584,
+    "moyenne_kwh": 0.00013162107666651264,
+    "kwh_pour_1000_tokens": 0.00008308567619379077
+  },
+  {
+    "model_name": "grok-3-mini-beta",
+    "nb_conversations": 3753,
+    "nb_valeurs_output_tokens": 3753,
+    "moyenne_output_tokens": 2195.437516653344,
+    "nb_valeurs_kwh": 3753,
+    "moyenne_kwh": 0.0018641886388507058,
+    "kwh_pour_1000_tokens": 0.0008491194236729708
+  },
+  {
+    "model_name": "grok-4-fast",
+    "nb_conversations": 4089,
+    "nb_valeurs_output_tokens": 4089,
+    "moyenne_output_tokens": 1449.9914404499877,
+    "nb_valeurs_kwh": 4089,
+    "moyenne_kwh": 0.020997241459969434,
+    "kwh_pour_1000_tokens": 0.014480941662285389
+  },
+  {
+    "model_name": "grok-4.1-fast",
+    "nb_conversations": 8738,
+    "nb_valeurs_output_tokens": 8738,
+    "moyenne_output_tokens": 786.6726939803159,
+    "nb_valeurs_kwh": 8738,
+    "moyenne_kwh": 0.011391761388841825,
+    "kwh_pour_1000_tokens": 0.014480941662285371
+  },
+  {
+    "model_name": "grok-4.20",
+    "nb_conversations": 909,
+    "nb_valeurs_output_tokens": 909,
+    "moyenne_output_tokens": 1095.2200220022003,
+    "nb_valeurs_kwh": 909,
+    "moyenne_kwh": 0.1501551467969075,
+    "kwh_pour_1000_tokens": 0.1371004398937165
+  },
+  {
+    "model_name": "hermes-3-llama-3.1-405b",
+    "nb_conversations": 13540,
+    "nb_valeurs_output_tokens": 13540,
+    "moyenne_output_tokens": 638.2620384047267,
+    "nb_valeurs_kwh": 13540,
+    "moyenne_kwh": 0.005829784442652125,
+    "kwh_pour_1000_tokens": 0.009133841732500807
+  },
+  {
+    "model_name": "hermes-4-70b",
+    "nb_conversations": 7054,
+    "nb_valeurs_output_tokens": 7054,
+    "moyenne_output_tokens": 498.4201871278707,
+    "nb_valeurs_kwh": 7054,
+    "moyenne_kwh": 0.00032772572365007434,
+    "kwh_pour_1000_tokens": 0.0006575289928335019
+  },
+  {
+    "model_name": "jamba-1.5-large",
+    "nb_conversations": 290,
+    "nb_valeurs_output_tokens": 290,
+    "moyenne_output_tokens": 961.2,
+    "nb_valeurs_kwh": 290,
+    "moyenne_kwh": 0.002975927617434927,
+    "kwh_pour_1000_tokens": 0.0030960545333280553
+  },
+  {
+    "model_name": "kimi-k2",
+    "nb_conversations": 4751,
+    "nb_valeurs_output_tokens": 4751,
+    "moyenne_output_tokens": 1021.2178488739213,
+    "nb_valeurs_kwh": 4751,
+    "moyenne_kwh": 0.0038650642917772995,
+    "kwh_pour_1000_tokens": 0.0037847598296869146
+  },
+  {
+    "model_name": "kimi-k2-thinking",
+    "nb_conversations": 2419,
+    "nb_valeurs_output_tokens": 2419,
+    "moyenne_output_tokens": 1854.0686233980985,
+    "nb_valeurs_kwh": 2419,
+    "moyenne_kwh": 0.007017204447320037,
+    "kwh_pour_1000_tokens": 0.0037847598296869137
+  },
+  {
+    "model_name": "kimi-k2.5",
+    "nb_conversations": 3074,
+    "nb_valeurs_output_tokens": 3074,
+    "moyenne_output_tokens": 2215.531880286272,
+    "nb_valeurs_kwh": 3074,
+    "moyenne_kwh": 0.008385256061898192,
+    "kwh_pour_1000_tokens": 0.0037847598296869107
+  },
+  {
+    "model_name": "kimi-k2.6",
+    "nb_conversations": 754,
+    "nb_valeurs_output_tokens": 754,
+    "moyenne_output_tokens": 3139.653846153846,
+    "nb_valeurs_kwh": 754,
+    "moyenne_kwh": 0.0118828357560451,
+    "kwh_pour_1000_tokens": 0.0037847598296869155
+  },
+  {
+    "model_name": "lfm-40b",
+    "nb_conversations": 6748,
+    "nb_valeurs_output_tokens": 6748,
+    "moyenne_output_tokens": 593.8329875518672,
+    "nb_valeurs_kwh": 6748,
+    "moyenne_kwh": 0.00011164785977218952,
+    "kwh_pour_1000_tokens": 0.00018801222248105212
+  },
+  {
+    "model_name": "lfm2-24b-a2b",
+    "nb_conversations": 1020,
+    "nb_valeurs_output_tokens": 1020,
+    "moyenne_output_tokens": 1055.0058823529412,
+    "nb_valeurs_kwh": 1020,
+    "moyenne_kwh": 0.00008637575232237062,
+    "kwh_pour_1000_tokens": 0.00008187229452193189
+  },
+  {
+    "model_name": "lfm2-8b-a1b",
+    "nb_conversations": 4370,
+    "nb_valeurs_output_tokens": 4370,
+    "moyenne_output_tokens": 739.0359267734553,
+    "nb_valeurs_kwh": 4370,
+    "moyenne_kwh": 0.00005960983441069269,
+    "kwh_pour_1000_tokens": 0.0000806589128500725
+  },
+  {
+    "model_name": "llama-3.1-405b",
+    "nb_conversations": 20169,
+    "nb_valeurs_output_tokens": 20169,
+    "moyenne_output_tokens": 1010.4373047746542,
+    "nb_valeurs_kwh": 20169,
+    "moyenne_kwh": 0.009229174422426397,
+    "kwh_pour_1000_tokens": 0.009133841732500831
+  },
+  {
+    "model_name": "llama-3.1-70b",
+    "nb_conversations": 10825,
+    "nb_valeurs_output_tokens": 10825,
+    "moyenne_output_tokens": 767.9511316397229,
+    "nb_valeurs_kwh": 10825,
+    "moyenne_kwh": 0.0005049501341324193,
+    "kwh_pour_1000_tokens": 0.0006575289928335074
+  },
+  {
+    "model_name": "llama-3.1-8b",
+    "nb_conversations": 19223,
+    "nb_valeurs_output_tokens": 19223,
+    "moyenne_output_tokens": 746.3330385475732,
+    "nb_valeurs_kwh": 19223,
+    "moyenne_kwh": 0.0000665375193238756,
+    "kwh_pour_1000_tokens": 0.000089152584553088
+  },
+  {
+    "model_name": "llama-3.1-nemotron-70b-instruct",
+    "nb_conversations": 14062,
+    "nb_valeurs_output_tokens": 14062,
+    "moyenne_output_tokens": 1143.0471483430522,
+    "nb_valeurs_kwh": 14062,
+    "moyenne_kwh": 0.0007515866402112131,
+    "kwh_pour_1000_tokens": 0.0006575289928335015
+  },
+  {
+    "model_name": "llama-3.3-70b",
+    "nb_conversations": 20804,
+    "nb_valeurs_output_tokens": 20804,
+    "moyenne_output_tokens": 835.047010190348,
+    "nb_valeurs_kwh": 20804,
+    "moyenne_kwh": 0.000549067619579095,
+    "kwh_pour_1000_tokens": 0.0006575289928335121
+  },
+  {
+    "model_name": "llama-4-scout",
+    "nb_conversations": 16676,
+    "nb_valeurs_output_tokens": 16676,
+    "moyenne_output_tokens": 731.5923482849604,
+    "nb_valeurs_kwh": 16676,
+    "moyenne_kwh": 0.0002928506216360236,
+    "kwh_pour_1000_tokens": 0.0004002920783993168
+  },
+  {
+    "model_name": "llama-maverick",
+    "nb_conversations": 9111,
+    "nb_valeurs_output_tokens": 9111,
+    "moyenne_output_tokens": 788.7825705191527,
+    "nb_valeurs_kwh": 9111,
+    "moyenne_kwh": 0.0012629736582329993,
+    "kwh_pour_1000_tokens": 0.0016011683135971786
+  },
+  {
+    "model_name": "magistral-medium",
+    "nb_conversations": 3488,
+    "nb_valeurs_output_tokens": 3488,
+    "moyenne_output_tokens": 990.8268348623853,
+    "nb_valeurs_kwh": 3488,
+    "moyenne_kwh": 0.0009063746085380866,
+    "kwh_pour_1000_tokens": 0.0009147659072677132
+  },
+  {
+    "model_name": "magistral-small-2506",
+    "nb_conversations": 5004,
+    "nb_valeurs_output_tokens": 5004,
+    "moyenne_output_tokens": 839.8177458033573,
+    "nb_valeurs_kwh": 5004,
+    "moyenne_kwh": 0.00009117623395928014,
+    "kwh_pour_1000_tokens": 0.00010856669130284012
+  },
+  {
+    "model_name": "minimax-m2",
+    "nb_conversations": 2239,
+    "nb_valeurs_output_tokens": 2239,
+    "moyenne_output_tokens": 1854.7378293881197,
+    "nb_valeurs_kwh": 2239,
+    "moyenne_kwh": 0.0013588454474792373,
+    "kwh_pour_1000_tokens": 0.0007326347831744619
+  },
+  {
+    "model_name": "minimax-m2.5",
+    "nb_conversations": 2847,
+    "nb_valeurs_output_tokens": 2847,
+    "moyenne_output_tokens": 1590.3087460484721,
+    "nb_valeurs_kwh": 2847,
+    "moyenne_kwh": 0.001165115503341675,
+    "kwh_pour_1000_tokens": 0.0007326347831744633
+  },
+  {
+    "model_name": "minimax-m2.7",
+    "nb_conversations": 750,
+    "nb_valeurs_output_tokens": 750,
+    "moyenne_output_tokens": 1811.8533333333332,
+    "nb_valeurs_kwh": 750,
+    "moyenne_kwh": 0.0013274267740105933,
+    "kwh_pour_1000_tokens": 0.0007326347831744623
+  },
+  {
+    "model_name": "ministral-8b-instruct-2410",
+    "nb_conversations": 18295,
+    "nb_valeurs_output_tokens": 18295,
+    "moyenne_output_tokens": 864.120688712763,
+    "nb_valeurs_kwh": 0,
+    "moyenne_kwh": "",
+    "kwh_pour_1000_tokens": ""
+  },
+  {
+    "model_name": "mistral-large-2411",
+    "nb_conversations": 17903,
+    "nb_valeurs_output_tokens": 17903,
+    "moyenne_output_tokens": 916.6195051108753,
+    "nb_valeurs_kwh": 0,
+    "moyenne_kwh": "",
+    "kwh_pour_1000_tokens": ""
+  },
+  {
+    "model_name": "mistral-large-2512",
+    "nb_conversations": 10765,
+    "nb_valeurs_output_tokens": 10765,
+    "moyenne_output_tokens": 2217.6076172782164,
+    "nb_valeurs_kwh": 10765,
+    "moyenne_kwh": 0.009168063906078551,
+    "kwh_pour_1000_tokens": 0.004134213751182451
+  },
+  {
+    "model_name": "mistral-medium-2508",
+    "nb_conversations": 13791,
+    "nb_valeurs_output_tokens": 13791,
+    "moyenne_output_tokens": 1875.0139946341817,
+    "nb_valeurs_kwh": 13791,
+    "moyenne_kwh": 0.0017151988779411994,
+    "kwh_pour_1000_tokens": 0.0009147659072677147
+  },
+  {
+    "model_name": "mistral-nemo-2407",
+    "nb_conversations": 11839,
+    "nb_valeurs_output_tokens": 11839,
+    "moyenne_output_tokens": 561.0283807754033,
+    "nb_valeurs_kwh": 11839,
+    "moyenne_kwh": 0.00005274009637226496,
+    "kwh_pour_1000_tokens": 0.00009400611124052639
+  },
+  {
+    "model_name": "mistral-saba",
+    "nb_conversations": 10228,
+    "nb_valeurs_output_tokens": 10228,
+    "moyenne_output_tokens": 935.0090926867423,
+    "nb_valeurs_kwh": 10228,
+    "moyenne_kwh": 0.00010151084353107041,
+    "kwh_pour_1000_tokens": 0.00010856669130284037
+  },
+  {
+    "model_name": "mistral-small-24b-instruct-2501",
+    "nb_conversations": 5831,
+    "nb_valeurs_output_tokens": 5831,
+    "moyenne_output_tokens": 912.8056937060538,
+    "nb_valeurs_kwh": 5831,
+    "moyenne_kwh": 0.00009910029396806025,
+    "kwh_pour_1000_tokens": 0.0001085666913028404
+  },
+  {
+    "model_name": "mistral-small-2506",
+    "nb_conversations": 11712,
+    "nb_valeurs_output_tokens": 11712,
+    "moyenne_output_tokens": 852.9870218579235,
+    "nb_valeurs_kwh": 11712,
+    "moyenne_kwh": 0.00009260597868737841,
+    "kwh_pour_1000_tokens": 0.00010856669130284047
+  },
+  {
+    "model_name": "mistral-small-2603",
+    "nb_conversations": 2377,
+    "nb_valeurs_output_tokens": 2377,
+    "moyenne_output_tokens": 1902.1026503996634,
+    "nb_valeurs_kwh": 2377,
+    "moyenne_kwh": 0.0006598456575217168,
+    "kwh_pour_1000_tokens": 0.0003469032848374783
+  },
+  {
+    "model_name": "mistral-small-3.1-24b",
+    "nb_conversations": 10949,
+    "nb_valeurs_output_tokens": 10949,
+    "moyenne_output_tokens": 917.7630833866107,
+    "nb_valeurs_kwh": 10949,
+    "moyenne_kwh": 0.00009963850136317676,
+    "kwh_pour_1000_tokens": 0.00010856669130284
+  },
+  {
+    "model_name": "mixtral-8x22b-instruct-v0.1",
+    "nb_conversations": 9928,
+    "nb_valeurs_output_tokens": 9928,
+    "moyenne_output_tokens": 594.0915592264303,
+    "nb_valeurs_kwh": 9928,
+    "moyenne_kwh": 0.0006313260088287524,
+    "kwh_pour_1000_tokens": 0.001062674597920235
+  },
+  {
+    "model_name": "mixtral-8x7b-instruct-v0.1",
+    "nb_conversations": 5216,
+    "nb_valeurs_output_tokens": 5216,
+    "moyenne_output_tokens": 644.837231595092,
+    "nb_valeurs_kwh": 5216,
+    "moyenne_kwh": 0.00012436701576332363,
+    "kwh_pour_1000_tokens": 0.00019286574916849172
+  },
+  {
+    "model_name": "nemotron-3-super-120b-a12b",
+    "nb_conversations": 1620,
+    "nb_valeurs_output_tokens": 1620,
+    "moyenne_output_tokens": 2756.795061728395,
+    "nb_valeurs_kwh": 1620,
+    "moyenne_kwh": 0.0010366223329606973,
+    "kwh_pour_1000_tokens": 0.000376024444962107
+  },
+  {
+    "model_name": "o3-mini",
+    "nb_conversations": 3304,
+    "nb_valeurs_output_tokens": 3304,
+    "moyenne_output_tokens": 1052.9754842615012,
+    "nb_valeurs_kwh": 3304,
+    "moyenne_kwh": 0.00010665209742815556,
+    "kwh_pour_1000_tokens": 0.00010128640127168341
+  },
+  {
+    "model_name": "o4-mini",
+    "nb_conversations": 6486,
+    "nb_valeurs_output_tokens": 6486,
+    "moyenne_output_tokens": 1130.2978723404256,
+    "nb_valeurs_kwh": 6486,
+    "moyenne_kwh": 0.00011448380385440204,
+    "kwh_pour_1000_tokens": 0.00010128640127168315
+  },
+  {
+    "model_name": "olmo-3-32b-think",
+    "nb_conversations": 1709,
+    "nb_valeurs_output_tokens": 1709,
+    "moyenne_output_tokens": 3996.2820362785255,
+    "nb_valeurs_kwh": 1709,
+    "moyenne_kwh": 0.0004726552412189502,
+    "kwh_pour_1000_tokens": 0.00011827374467771623
+  },
+  {
+    "model_name": "phi-3.5-mini-instruct",
+    "nb_conversations": 5419,
+    "nb_valeurs_output_tokens": 5419,
+    "moyenne_output_tokens": 865.9108691640524,
+    "nb_valeurs_kwh": 5419,
+    "moyenne_kwh": 0.0000719447900880487,
+    "kwh_pour_1000_tokens": 0.00008308567619379113
+  },
+  {
+    "model_name": "phi-4",
+    "nb_conversations": 18918,
+    "nb_valeurs_output_tokens": 18918,
+    "moyenne_output_tokens": 849.2267681573105,
+    "nb_valeurs_kwh": 18918,
+    "moyenne_kwh": 0.00008189337842729794,
+    "kwh_pour_1000_tokens": 0.00009643287458424537
+  },
+  {
+    "model_name": "qwen-3-8b",
+    "nb_conversations": 652,
+    "nb_valeurs_output_tokens": 652,
+    "moyenne_output_tokens": 2265.803680981595,
+    "nb_valeurs_kwh": 652,
+    "moyenne_kwh": 0.00020200225424941127,
+    "kwh_pour_1000_tokens": 0.00008915258455308869
+  },
+  {
+    "model_name": "qwen2-7b-instruct",
+    "nb_conversations": 155,
+    "nb_valeurs_output_tokens": 155,
+    "moyenne_output_tokens": 520.6709677419354,
+    "nb_valeurs_kwh": 155,
+    "moyenne_kwh": 0.00004578738986662407,
+    "kwh_pour_1000_tokens": 0.00008793920288122931
+  },
+  {
+    "model_name": "qwen2.5-32b-instruct",
+    "nb_conversations": 363,
+    "nb_valeurs_output_tokens": 363,
+    "moyenne_output_tokens": 540.0247933884298,
+    "nb_valeurs_kwh": 363,
+    "moyenne_kwh": 0.00006387075453285954,
+    "kwh_pour_1000_tokens": 0.00011827374467771611
+  },
+  {
+    "model_name": "qwen2.5-7b-instruct",
+    "nb_conversations": 3035,
+    "nb_valeurs_output_tokens": 3035,
+    "moyenne_output_tokens": 881.8,
+    "nb_valeurs_kwh": 3035,
+    "moyenne_kwh": 0.00007754478910066793,
+    "kwh_pour_1000_tokens": 0.00008793920288122923
+  },
+  {
+    "model_name": "qwen2.5-coder-32b-instruct",
+    "nb_conversations": 14803,
+    "nb_valeurs_output_tokens": 14803,
+    "moyenne_output_tokens": 918.3497939606837,
+    "nb_valeurs_kwh": 0,
+    "moyenne_kwh": "",
+    "kwh_pour_1000_tokens": ""
+  },
+  {
+    "model_name": "qwen3-30b-a3b",
+    "nb_conversations": 2047,
+    "nb_valeurs_output_tokens": 2047,
+    "moyenne_output_tokens": 1575.4943820224719,
+    "nb_valeurs_kwh": 2047,
+    "moyenne_kwh": 0.00013090101606985652,
+    "kwh_pour_1000_tokens": 0.00008308567619379134
+  },
+  {
+    "model_name": "qwen3-32b",
+    "nb_conversations": 2044,
+    "nb_valeurs_output_tokens": 2044,
+    "moyenne_output_tokens": 1925.7172211350294,
+    "nb_valeurs_kwh": 2044,
+    "moyenne_kwh": 0.00022776178693400528,
+    "kwh_pour_1000_tokens": 0.00011827374467771603
+  },
+  {
+    "model_name": "qwen3-coder-next",
+    "nb_conversations": 2953,
+    "nb_valeurs_output_tokens": 2953,
+    "moyenne_output_tokens": 1579.2827632915678,
+    "nb_valeurs_kwh": 2953,
+    "moyenne_kwh": 0.0005248631051571174,
+    "kwh_pour_1000_tokens": 0.00033234270477516565
+  },
+  {
+    "model_name": "qwen3-max-2025-09-23",
+    "nb_conversations": 7745,
+    "nb_valeurs_output_tokens": 7745,
+    "moyenne_output_tokens": 1213.027630729503,
+    "nb_valeurs_kwh": 7745,
+    "moyenne_kwh": 0.004591018249085314,
+    "kwh_pour_1000_tokens": 0.0037847598296869137
+  },
+  {
+    "model_name": "qwen3.5-35b-a3b",
+    "nb_conversations": 3201,
+    "nb_valeurs_output_tokens": 3201,
+    "moyenne_output_tokens": 4213.598250546705,
+    "nb_valeurs_kwh": 3201,
+    "moyenne_kwh": 0.0007001793197112999,
+    "kwh_pour_1000_tokens": 0.00016617135238758304
+  },
+  {
+    "model_name": "qwen3.5-397b-a17b",
+    "nb_conversations": 3022,
+    "nb_valeurs_output_tokens": 3022,
+    "moyenne_output_tokens": 3395.7379219060226,
+    "nb_valeurs_kwh": 3022,
+    "moyenne_kwh": 0.005437147961836274,
+    "kwh_pour_1000_tokens": 0.0016011683135971845
+  },
+  {
+    "model_name": "qwen3.6-plus",
+    "nb_conversations": 719,
+    "nb_valeurs_output_tokens": 719,
+    "moyenne_output_tokens": 3622.2851182197496,
+    "nb_valeurs_kwh": 719,
+    "moyenne_kwh": 0.039766104826311835,
+    "kwh_pour_1000_tokens": 0.010978181873727198
+  },
+  {
+    "model_name": "qwq-32b",
+    "nb_conversations": 2938,
+    "nb_valeurs_output_tokens": 2938,
+    "moyenne_output_tokens": 1321.5517358747447,
+    "nb_valeurs_kwh": 2938,
+    "moyenne_kwh": 0.0001563048725872421,
+    "kwh_pour_1000_tokens": 0.00011827374467771615
+  },
+  {
+    "model_name": "trinity-large-preview",
+    "nb_conversations": 2943,
+    "nb_valeurs_output_tokens": 2943,
+    "moyenne_output_tokens": 558.5575942915392,
+    "nb_valeurs_kwh": 2943,
+    "moyenne_kwh": 0.0008509691342528403,
+    "kwh_pour_1000_tokens": 0.0015235118865981737
+  }
+]
