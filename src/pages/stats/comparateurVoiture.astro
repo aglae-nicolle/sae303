@@ -1,0 +1,241 @@
+---
+import * as d3 from "d3";
+import moyennes from "../../assets/moyennes_par_modele.json";
+import Layout from "../../layouts/Layout.astro";
+
+const modelesConnus = new Map([
+    ["gpt-5", "GPT-5"],
+    ["claude-4-5-sonnet", "Claude 4.5 Sonnet"],
+    ["gemini-2.5-flash", "Gemini 2.5 Flash"],
+    ["mistral-large-2512", "Mistral Large 3"],
+    ["deepseek-r1", "DeepSeek R1"],
+]);
+const labelModele = (name) => modelesConnus.get(name) ?? name;
+
+// Wh par requête, moyenne pondérée par le nombre de conversations
+// (même logique que la page comparateurIA)
+const whParRequete = Array.from(
+    d3.rollup(
+        moyennes.filter(
+            (d) =>
+                d.moyenne_kwh !== "" &&
+                d.moyenne_kwh != null &&
+                d.nb_conversations > 0,
+        ),
+        (v) =>
+            (d3.sum(v, (d) => +d.moyenne_kwh * d.nb_conversations) /
+                d3.sum(v, (d) => d.nb_conversations)) *
+            1000,
+        (d) => labelModele(d.model_name),
+    ),
+);
+
+// Consommation d'énergie aux 100 km — HYPOTHÈSES, à remplacer par les
+// valeurs ADEME Car Labelling (mars 2015) de ton notebook
+const typesVehicules = [
+    { label: "Voiture électrique", whParKm: 160 },
+    { label: "Voiture essence", whParKm: 650 }, // ~6,5 L/100 km
+    { label: "Voiture diesel", whParKm: 550 }, // ~5,5 L/100 km
+    { label: "Vélo électrique", whParKm: 8 },
+];
+
+const NB_REQUETES_DEFAUT = 1000;
+
+const fmtFr = (x, dec) =>
+    x.toLocaleString("fr-FR", { maximumFractionDigits: dec });
+
+const mesures = {
+    types: typesVehicules,
+    whParRequete,
+    nbRequetesDefaut: NB_REQUETES_DEFAUT,
+};
+---
+
+<Layout>
+    <nav
+        class="bg-marron-fonce text-marron-clair flex justify-between px-10 py-3 text-sm"
+    >
+        <a href="/stats/quiz" class="hover:underline">
+            Tester mes connaissances sur l'IA
+        </a>
+        <a href="/stats/comparateurIA" class="hover:underline">
+            Quelle est la meilleure IA ?
+        </a>
+        <a href="/stats/comparateurQuotidien" class="hover:underline">
+            Impact de l'IA vs Impact d'actions du quotidien
+        </a>
+        <a href="/stats/projetDataCenter" class="hover:underline">
+            Projet de construction de Data Center en France
+        </a>
+    </nav>
+
+    <div
+        class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+    >
+        <h1 class="text-marron-fonce">
+            Que parcourt-on avec l'énergie d'une requête ?
+        </h1>
+        <p class="text-vert-fonce uppercase mb-8">
+            Distance parcourue par un véhicule avec l'énergie consommée par vos
+            requêtes à une IA
+        </p>
+    </div>
+
+    <div class="m-10 mb-6 flex flex-col gap-3">
+        <div class="flex flex-wrap items-center gap-3">
+            <label
+                for="nb-requetes"
+                class="text-sm font-medium text-vert-fonce"
+            >
+                Nombre de requêtes :
+                <output id="nb-requetes-val" class="font-semibold"></output>
+            </label>
+            <input
+                type="range"
+                id="nb-requetes"
+                min="1"
+                max="100000"
+                step="1"
+                value={NB_REQUETES_DEFAUT}
+                class="w-72 accent-vert-fonce"
+            />
+        </div>
+        <p class="text-xs text-marron-fonce">
+            Échelle logarithmique : de 1 à 100 000 requêtes.
+        </p>
+    </div>
+
+    <div id="chart-quotidien" class="w-full overflow-x-auto px-10"></div>
+
+    <figcaption
+        class="mt-4 border-t border-vert-fonce/15 pt-3 text-xs text-marron-fonce p-10"
+    >
+        <p>
+            <strong>Sources :</strong>
+            <a
+                href="https://huggingface.co/AIEnergyScore"
+                class="underline underline-offset-2 hover:text-vert-fonce"
+                target="_blank"
+                rel="noopener noreferrer">AI Energy Score</a
+            >, ADEME Car Labelling (mars 2015).
+        </p>
+        <p class="mt-1">
+            Méthodologie : distance = énergie des requêtes (Wh) ÷ consommation
+            du véhicule (Wh/km). Consommations moyennes d'homologation.
+        </p>
+    </figcaption>
+</Layout>
+
+<script
+    is:inline
+    type="application/json"
+    id="chart-data"
+    set:html={JSON.stringify(mesures)}
+/>
+<script>
+    import * as Plot from "@observablehq/plot";
+    import * as d3 from "d3";
+
+    const el = document.getElementById("chart-quotidien");
+    const slider = document.getElementById("nb-requetes") as HTMLInputElement;
+    const sortie = document.getElementById("nb-requetes-val");
+
+    const { types, whParRequete } = JSON.parse(
+        document.getElementById("chart-data").textContent,
+    );
+
+    const couleurs = ["#394030", "#61453a", "#dbbfa7", "#dad09e"];
+
+    const fr = (x: number, dec = 0) =>
+        x.toLocaleString("fr-FR", { maximumFractionDigits: dec });
+
+    const formatDistance = (km: number) => {
+        if (km < 0.001) return `${fr(km * 1_000_000)} mm`;
+        if (km < 1) return `${fr(km * 1000, km < 0.01 ? 1 : 0)} m`;
+        if (km < 100) return `${fr(km, 1)} km`;
+        return `${fr(km, 0)} km`;
+    };
+
+    // Curseur logarithmique : position 0..1000 -> 1..100 000 requêtes
+    const MAX = 100_000;
+    const positionVersNb = (p: number) =>
+        Math.max(1, Math.round(Math.pow(MAX, p / 1000)));
+    slider.min = "0";
+    slider.max = "1000";
+    slider.step = "1";
+    slider.value = String(Math.round((Math.log(1000) / Math.log(MAX)) * 1000)); // 1000 requêtes par défaut
+
+    function render() {
+        const width = el.clientWidth;
+        const nbRequetes = positionVersNb(+slider.value);
+        sortie.textContent = fr(nbRequetes);
+
+        const distances = whParRequete.flatMap(([modele, wh]) =>
+            types.map((t) => ({
+                modele,
+                vehicule: t.label,
+                km: (wh * nbRequetes) / t.whParKm,
+            })),
+        );
+
+        const ordre = d3.sort(whParRequete, ([, wh]) => -wh).map(([m]) => m);
+
+        const chart = Plot.plot({
+            width,
+            height: Math.max(320, ordre.length * types.length * 28 + 100),
+            marginLeft: 130,
+            marginRight: 80,
+            style: {
+                background: "#fff1df",
+                color: "#394030",
+                fontSize: "12px",
+            },
+            title: `Distance parcourue avec l'énergie de ${fr(nbRequetes)} requête${nbRequetes > 1 ? "s" : ""}`,
+            caption:
+                "Consommations moyennes d'homologation, ADEME Car Labelling, mars 2015",
+            fy: {
+                label: null,
+                axis: "left",
+                padding: 0.25,
+                domain: ordre,
+            },
+            y: {
+                axis: null,
+                domain: types.map((t) => t.label),
+                padding: 0.1,
+            },
+            x: { axis: null },
+            color: {
+                legend: true,
+                domain: types.map((t) => t.label),
+                range: couleurs,
+            },
+            marks: [
+                Plot.barX(distances, {
+                    fy: "modele",
+                    y: "vehicule",
+                    x: "km",
+                    fill: "vehicule",
+                    title: (d) =>
+                        `${d.modele} · ${d.vehicule} : ${formatDistance(d.km)}`,
+                }),
+                Plot.text(distances, {
+                    fy: "modele",
+                    y: "vehicule",
+                    x: "km",
+                    text: (d) => formatDistance(d.km),
+                    textAnchor: "start",
+                    dx: 6,
+                    fill: "#394030",
+                }),
+                Plot.ruleX([0], { stroke: "#394030" }),
+            ],
+        });
+
+        el.replaceChildren(chart);
+    }
+
+    slider.addEventListener("input", render);
+    render();
+    new ResizeObserver(() => render()).observe(el);
+</script>

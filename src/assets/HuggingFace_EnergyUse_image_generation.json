@@ -1,0 +1,62 @@
+[
+  {
+    "model": "Mitsua/mitsua-diffusion-one",
+    "total_gpu_energy": 0.186811914,
+    "energy_score": 5
+  },
+  {
+    "model": "gsdf/Counterfeit-V2.5",
+    "total_gpu_energy": 0.187366386,
+    "energy_score": 5
+  },
+  {
+    "model": "stabilityai/sd-turbo",
+    "total_gpu_energy": 0.189864946,
+    "energy_score": 5
+  },
+  {
+    "model": "stabilityai/stable-cascade",
+    "total_gpu_energy": 1.214355539,
+    "energy_score": 2
+  },
+  {
+    "model": "stabilityai/stable-diffusion-2-1",
+    "total_gpu_energy": 0.534466733,
+    "energy_score": 4
+  },
+  {
+    "model": "stabilityai/sdxl-turbo",
+    "total_gpu_energy": 0.385568798,
+    "energy_score": 5
+  },
+  {
+    "model": "stabilityai/stable-diffusion-xl-base-1.0",
+    "total_gpu_energy": 1.639845472,
+    "energy_score": 1
+  },
+  {
+    "model": "dreamlike-art/dreamlike-photoreal-2.0",
+    "total_gpu_energy": 0.581331892,
+    "energy_score": 4
+  },
+  {
+    "model": "prompthero/openjourney-v4",
+    "total_gpu_energy": 0.203367331,
+    "energy_score": 5
+  },
+  {
+    "model": "prompthero/openjourney",
+    "total_gpu_energy": 0.196880224,
+    "energy_score": 5
+  },
+  {
+    "model": "SimianLuo/LCM_Dreamshaper_v7",
+    "total_gpu_energy": 0.322044411,
+    "energy_score": 5
+  },
+  {
+    "model": "Yntec/epiCPhotoGasm",
+    "total_gpu_energy": 0.586574491,
+    "energy_score": 4
+  }
+]

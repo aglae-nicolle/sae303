@@ -1,17 +1,18 @@
 ---
 import geoJson from "../../assets/departements-version-simplifiee.geojson?raw";
-import projetsJson from "../../assets/projets_datacenters.json?raw";
+import projetsJson from "../../assets/projets_de_data_centers_en_france.json";
 import Layout from "../../layouts/Layout.astro";
 import { groupByDepartment } from "../../lib/geo.js";
 
 const geo = JSON.parse(geoJson);
-const projets = JSON.parse(projetsJson);
+const projets = projetsJson;
 
 // Métropole uniquement : on retire les DROM (971, 972, 973, 974, 976)
 const metro = {
     type: "FeatureCollection",
     features: geo.features.filter(
-        (f) => !String(f.properties.code).startsWith("97"),
+        (f: { properties: { code: string } }) =>
+            !String(f.properties.code).startsWith("97"),
     ),
 };
 
@@ -46,8 +47,8 @@ const mapData = { metro, byDep: Object.fromEntries(byDep), max };
         <a href="/stats/comparateurIA" class="hover:underline">
             Quelle est la meilleure IA ?
         </a>
-        <a href="/stats/comparateurQuotidien" class="hover:underline">
-            Impact de l'IA vs Impact d'actions du quotidien
+        <a href="/stats/comparateurVoiture" class="hover:underline">
+            IA vs Voiture
         </a>
         <a href="/stats/projetDataCenter" class="hover:underline">
             Projet de construction de Data Center en France
@@ -124,21 +125,34 @@ const mapData = { metro, byDep: Object.fromEntries(byDep), max };
     import * as Plot from "@observablehq/plot";
 
     const el = document.getElementById("chart-carte");
+    if (!el) throw new Error("Élément chart-carte introuvable");
+    const mapDataEl = document.getElementById("map-data");
+    if (!mapDataEl) throw new Error("Élément map-data introuvable");
     const {
         metro,
         byDep: byDepObj,
         max,
-    } = JSON.parse(document.getElementById("map-data").textContent);
+    } = JSON.parse(mapDataEl.textContent ?? "");
 
-    const byDep = new Map(Object.entries(byDepObj));
-    const count = (f) => byDep.get(f.properties.code).items.length;
+    const byDep = new Map(
+        Object.entries(byDepObj) as [
+            string,
+            { nom: string; items: string[] },
+        ][],
+    );
+    const count = (f: { properties: { code: string } }) =>
+        byDep.get(f.properties.code)?.items.length ?? 0;
 
-    const sansProjet = metro.features.filter((f) => count(f) === 0);
-    const avecProjets = metro.features.filter((f) => count(f) > 0);
+    const sansProjet = metro.features.filter(
+        (f: { properties: { code: string } }) => count(f) === 0,
+    );
+    const avecProjets = metro.features.filter(
+        (f: { properties: { code: string } }) => count(f) > 0,
+    );
 
     function render() {
         // Carré, plafonné à 760 px, adapté à la largeur disponible
-        const size = Math.min(760, el.clientWidth);
+        const size = Math.min(760, el!.clientWidth);
 
         const chart = Plot.plot({
             width: size,
@@ -178,6 +192,8 @@ const mapData = { metro, byDep: Object.fromEntries(byDep), max };
                     strokeWidth: 0.8,
                     title: (f) => {
                         const o = byDep.get(f.properties.code);
+                        if (!o)
+                            return `${f.properties.nom} (${f.properties.code}) : 0 projet`;
                         return (
                             `${o.nom} (${f.properties.code}) : ${o.items.length} projet${o.items.length > 1 ? "s" : ""}\n` +
                             o.items.map((n) => "• " + n).join("\n")
