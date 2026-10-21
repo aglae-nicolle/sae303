@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-=======
 ---
 import "../styles/global.css";
 import Header from "../components/Header.astro";
@@ -31,18 +6,17 @@ import Footer from "../components/Footer.astro";
 
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/feuille.png" />
-    <meta name="generator" content={Astro.generator} />
-    <alt>designed by Magnific from Flaticon</alt>
-    <title>SAE 303 - Impact IA</title>
-  </head>
-  <body class="bg-beige">
-    <Header />
-    <slot />
-    <Footer />
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/feuille.png" />
+		<meta name="generator" content={Astro.generator} />
+	</head><alt>designed by Magnific from Flaticon</alt>
+	<title>SAE 303 - Impact IA</title>
+
+	<body class="bg-beige">
+		<Header />
+		<slot />
+		<Footer />
+	</body>
 </html>
->>>>>>> 2af884976ad39019fa90c947da3766e45853ae4f

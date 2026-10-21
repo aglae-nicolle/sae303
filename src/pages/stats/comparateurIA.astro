@@ -1,81 +1,163 @@
 ---
-import Layout from "../../layouts/Layout.astro";
 import * as Plot from "@observablehq/plot";
 import PlotFigure from "../../components/PlotFigure.astro";
-import penguins from "../../assets/penguins.json";
+import raw from "../../assets/moyennes_par_modele.json"; // adapte le chemin
 
-export function getImpactData() {
-    return penguins
-        .filter(
-            (d) =>
-                typeof d.body_mass_g === "number" &&
-                typeof d.culmen_length_mm === "number",
-        )
-        .slice(0, 8)
-        .map((d, i) => ({
-            model: `${d.species} #${i + 1}`,
-            waterMlPerToken: d.culmen_length_mm / 1000,
-            energyWhPerToken: d.body_mass_g / 1_000_000,
-        }));
-}
+// --- À renseigner -----------------------------------------------------
+const WATER_KEY: string | null = null; // ex. "litres_pour_1000_tokens"
+const WUE_L_PER_KWH: number | null = null; // facteur sourcé, si pas de champ eau
+// ----------------------------------------------------------------------
 
-const data = getImpactData();
+const ENERGY_COLOR = "var(--color-marron-fonce)";
+const WATER_COLOR = "var(--color-vert-fonce)";
+const TEXT = "var(--color-marron-fonce)";
 
-const METRICS = [
-    {
-        key: "waterMlPerToken",
-        title: "Consommation d'eau par token",
-        unit: "mL / token",
-        color: "var(--color-vert-fonce)",
+const data = raw
+    .filter((d: any) => typeof d.kwh_pour_1000_tokens === "number")
+    .map((d: any) => {
+        const energy = d.kwh_pour_1000_tokens; // déjà pour 1000 tokens
+        let water: number | null = null;
+        if (WATER_KEY && typeof d[WATER_KEY] === "number") water = d[WATER_KEY];
+        else if (!WATER_KEY && WUE_L_PER_KWH !== null)
+            water = energy * WUE_L_PER_KWH;
+        return { model: d.model_name, energy, water };
+    })
+    .sort((a, b) => b.energy - a.energy);
+
+const hasWater = data.some((d) => d.water !== null);
+const maxE = Math.max(...data.map((d) => d.energy));
+const maxW = hasWater ? Math.max(...data.map((d) => d.water ?? 0)) : 1;
+
+// Normalisation : énergie vers la droite (+), eau vers la gauche (−)
+const rows = data.map((d) => ({
+    ...d,
+    eN: d.energy / maxE,
+    wN: d.water !== null ? -d.water / maxW : null,
+}));
+const rowsWater = rows.filter((r) => r.wN !== null);
+
+const fmt = (v: number) =>
+    v !== 0 && Math.abs(v) < 0.001
+        ? v
+              .toExponential(1)
+              .replace("e", " × 10^")
+              .replace("^-", "^−")
+              .replace("^+", "^")
+        : v.toPrecision(2);
+
+const ticks = [0.25, 0.5, 0.75, 1];
+const modelNames = rows.map((r) => r.model);
+
+const options = {
+    title: "Électricité et eau pour 1 000 tokens, selon le modèle",
+    subtitle: hasWater
+        ? "Droite : électricité (kWh). Gauche : eau (L). Chaque côté a sa propre échelle."
+        : "Électricité (kWh) pour 1 000 tokens",
+    ariaLabel:
+        "Graphique à barres horizontales divergentes : électricité vers la droite, eau vers la gauche, un modèle par ligne",
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 50,
+    marginBottom: 50,
+    width: 900,
+    height: Math.max(300, rows.length * 34 + 120),
+    x: { axis: null, domain: [-1.25, 1.25] },
+    y: { axis: null, domain: modelNames, padding: 0.25 },
+    marks: [
+        // Grille légère
+        Plot.ruleX([...ticks, ...(hasWater ? ticks.map((t) => -t) : [])], {
+            stroke: TEXT,
+            strokeOpacity: 0.12,
+        }),
+
+        // Barres électricité (droite)
+        Plot.barX(rows, { y: "model", x1: 0, x2: "eN", fill: ENERGY_COLOR }),
+        Plot.text(rows, {
+            y: "model",
+            x: "eN",
+            text: (d: any) => fmt(d.energy),
+            textAnchor: "start",
+            dx: 6,
+            fill: TEXT,
+        }),
+
+        // Barres eau (gauche), uniquement si la donnée existe
+        ...(hasWater
+            ? [
+                  Plot.barX(rowsWater, {
+                      y: "model",
+                      x1: 0,
+                      x2: "wN",
+                      fill: WATER_COLOR,
+                  }),
+                  Plot.text(rowsWater, {
+                      y: "model",
+                      x: "wN",
+                      text: (d: any) => fmt(d.water),
+                      textAnchor: "end",
+                      dx: -6,
+                      fill: TEXT,
+                  }),
+              ]
+            : []),
+
+        // Axe central vertical
+        Plot.ruleX([0], { stroke: TEXT, strokeWidth: 1.5 }),
+
+        // Noms des modèles, au centre
+        Plot.text(modelNames, {
+            y: (d: string) => d,
+            x: 0,
+            text: (d: string) => d,
+            textAnchor: "middle",
+            dy: -14,
+            fill: TEXT,
+            fontWeight: "bold",
+            fontSize: 11,
+        }),
+
+        // Graduations électricité (côté droit)
+        Plot.text(ticks, {
+            x: (t: number) => t,
+            frameAnchor: "bottom",
+            dy: 18,
+            text: (t: number) => fmt(t * maxE),
+            fill: ENERGY_COLOR,
+            fontSize: 11,
+        }),
+        Plot.text(["Électricité (kWh / 1 000 tokens) →"], {
+            frameAnchor: "bottom-right",
+            dy: 38,
+            fill: ENERGY_COLOR,
+            fontWeight: "bold",
+        }),
+
+        // Graduations eau (côté gauche)
+        ...(hasWater
+            ? [
+                  Plot.text(ticks, {
+                      x: (t: number) => -t,
+                      frameAnchor: "bottom",
+                      dy: 18,
+                      text: (t: number) => fmt(t * maxW),
+                      fill: WATER_COLOR,
+                      fontSize: 11,
+                  }),
+                  Plot.text(["← Eau (L / 1 000 tokens)"], {
+                      frameAnchor: "bottom-left",
+                      dy: 38,
+                      fill: WATER_COLOR,
+                      fontWeight: "bold",
+                  }),
+              ]
+            : []),
+    ],
+    style: {
+        background: "transparent",
+        color: TEXT,
+        fontFamily: "system-ui, sans-serif",
     },
-    {
-        key: "energyWhPerToken",
-        title: "Consommation d'électricité par token",
-        unit: "Wh / token",
-        color: "var(--color-marron-fonce)",
-    },
-];
-
-function buildOptions(metric: (typeof METRICS)[number]) {
-    return {
-        title: metric.title,
-        subtitle: `Unité : ${metric.unit}`,
-        ariaLabel: `Diagramme à barres : ${metric.title.toLowerCase()} pour chaque modèle, en ${metric.unit}`,
-        width: 720,
-        height: 60 + data.length * 36,
-        marginLeft: 140,
-        grid: true,
-        x: { label: `${metric.unit} →` },
-        y: { label: null },
-        marks: [
-            Plot.frame({ stroke: "var(--color-marron-fonce)" }),
-            Plot.barX(data, {
-                y: "model",
-                x: metric.key,
-                fill: metric.color,
-                sort: { y: "-x" },
-            }),
-            Plot.text(data, {
-                y: "model",
-                x: metric.key,
-                text: (d: any) => d[metric.key].toPrecision(2),
-                dx: 6,
-                textAnchor: "start",
-                fill: "var(--color-marron-fonce)",
-            }),
-            Plot.ruleX([0], { stroke: "var(--color-marron-fonce)" }),
-        ],
-        style: {
-            background: "transparent",
-            color: "var(--color-marron-fonce)",
-            fontFamily: "system-ui, sans-serif",
-        },
-    };
-}
+};
 ---
 
-<Layout>
-    <div class="flex flex-col gap-10 text-marron-fonce">
-        {METRICS.map((m) => <PlotFigure options={buildOptions(m)} />)}
-    </div>
-</Layout>
+<PlotFigure options={options} />
