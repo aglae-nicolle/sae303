@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PlotFigure from "../../components/PlotFigure.astro";
+import * as Plot from "@observablehq/plot";
+import penguins from "../../assets/penguins.json";
+
+const data = penguins.filter(
+    (d) => d.culmen_length_mm != null && d.culmen_depth_mm != null,
+);
+---
+
+<Layout>
+    <div
+        class="bg-marron-clair p-10 items-center justify-center flex py-20 gap-4 flex-col"
+    >
+        <!-- Hero -->
+        <h1 class="text-marron-fonce">
+            Quelle est la meilleure IA générative ?
+        </h1>
+        <p class="text-vert-fonce uppercase mb-8">
+            Ou quelle est la moins pire...
+        </p>
+        <a
+            href="/stats/quiz"
+            class="bg-vert-fonce rounded-2xl py-3 px-6 text-vert-clair hover:bg-orange hover:text-marron-fonce"
+        >
+            Tester mes connaissances sur l'IA
+        </a>
+    </div>
+
+    <div class="mx-22 mt-15 mb-25 text-marron">
+        <h2 class="text-vert-fonce ml-7 mb-5">
+            Impact des différentes IA sur l'environnement
+        </h2>
+        <p class="text-marron-fonce mb-15">
+            Toutes les IA ne tournent pas sous le même algorithme, ne sont pas
+            optimisées de la même façon. Par conséquent, toutes les IA n'ont pas
+            le même impact sur notre environnement.
+        </p>
+        <PlotFigure
+            options={{
+                title: "Longueur vs profondeur du bec (culmen)",
+                subtitle:
+                    "Chaque point représente un manchot. La couleur indique l’espèce.",
+                caption:
+                    "Figure 1. Relation entre la longueur et la profondeur du bec selon l’espèce. Les Gentoo ont en moyenne un bec plus long et moins profond.",
+                ariaLabel:
+                    "Nuage de points : longueur du bec en abscisse, profondeur en ordonnée, coloré par espèce (Adélie, Chinstrap, Gentoo)",
+                grid: true,
+                color: {
+                    legend: true,
+                    label: "Espèce",
+                },
+                x: { label: "Longueur du bec (mm) →" },
+                y: { label: "↑ Profondeur du bec (mm)" },
+                marks: [
+                    Plot.frame({ stroke: "#334155" }),
+                    Plot.dot(data, {
+                        x: "culmen_length_mm",
+                        y: "culmen_depth_mm",
+                        stroke: "species",
+                        tip: true,
+                    }),
+                ],
+                width: 720,
+                height: 480,
+                style: {
+                    background: "transparent",
+                    color: "#e2e8f0",
+                    fontFamily: "system-ui, sans-serif",
+                },
+            }}
+        />
+    </div>
+</Layout>
